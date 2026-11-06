@@ -159,7 +159,7 @@
   .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
   /* Stats strip */
-  .stats { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; background: var(--surface);
+  .stats { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; margin-top: 56px; background: var(--surface);
            border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
   .stat { padding: 22px 24px; position: relative; }
   .stat + .stat::before { content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 1px; background: var(--border); }
@@ -235,7 +235,8 @@
   .pill svg { width: 14px; height: 14px; }
   .mthumb { position: relative; margin: -24px -24px 6px; aspect-ratio: 16/9; background: var(--media); cursor: zoom-in;
             overflow: hidden; border: 0; padding: 0; display: block; }
-  .mthumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .mthumb .backdrop { position: absolute; inset: -30px; background-size: cover; background-position: center; filter: blur(28px) brightness(.6); }
+  .mthumb img { position: relative; width: 100%; height: 100%; object-fit: contain; display: block; transition: transform .4s; }
   .mini:hover .mthumb img { transform: scale(1.04); }
   .mthumb .count { top: auto; bottom: 12px; }
 
@@ -390,9 +391,6 @@
     .card:nth-child(even) .shots { order: 0; }
     .shots { min-height: 260px; }
     .card .body { padding: 24px; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat:nth-child(3)::before { display: none; }
-    .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
     .hero-flower { width: 300px; height: 300px; right: -120px; top: 0; }
   }
   @media (max-width: 640px) {
@@ -401,7 +399,8 @@
     .hero { gap: 26px; }
     .avatar { width: 128px; height: 128px; font-size: 2.2rem; }
     .stats { margin-top: 40px; }
-    .stat { padding: 18px; }
+    .stat { padding: 16px 14px; }
+    .stat .lbl { font-size: .78rem; }
     .exp { grid-template-columns: 1fr; padding: 18px; }
     .exp .when { grid-column: 1; grid-row: auto; justify-self: start; margin: 4px 0; }
     .timeline { padding-left: 26px; }
@@ -437,10 +436,9 @@ const SITE = {
   status: "Open to internships & graduate roles",   // badge above your name; set to "" to hide
   // Numbers shown under your intro. decimals = how many decimal places to show.
   stats: [
-    { value: 3.92, decimals: 2, label: "Average Dean's List GPA" },
+    { value: 3.85, decimals: 2, label: "CGPA" },
     { value: 11, label: "Projects built" },
     { value: 14, label: "Leadership & volunteer roles" },
-    { value: 150, suffix: "+", label: "Attendees at an event I led" },
   ],
   initials: "KS",
   links: {
@@ -615,7 +613,7 @@ const SITE = {
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/GAMEDEV", demo: "",
     },
     {
-      slug: "grabot", categories: ["AI", "Web"], title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
+      slug: "grabot", categories: ["AI"], title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
       description: "Chat-based AI assistant for GrabFood merchants. I built the mock merchant data, daily report metrics, stock projections, low-stock alerts and the inventory update feature.",
       tech: ["Python", "Flask", "Gemini"], github: "https://github.com/ProProcer/mex-assistant-hackathon2", demo: "",
     },
@@ -1131,7 +1129,7 @@ const SITE = {
     const btn = document.createElement("button");
     btn.className = "mthumb";
     btn.setAttribute("aria-label", `View ${p.title} images`);
-    btn.innerHTML = `<img src="${esc(list[0])}" alt="${esc(p.title)} screenshot">` +
+    btn.innerHTML = `<span class="backdrop" style="background-image:url('${esc(list[0])}')"></span><img src="${esc(list[0])}" alt="${esc(p.title)} screenshot">` +
       (list.length > 1 ? `<span class="count">${list.length} images</span>` : "");
     btn.onclick = () => openLightbox(list, 0, p.title);
     card.prepend(btn);

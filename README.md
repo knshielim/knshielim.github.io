@@ -7,7 +7,7 @@ This is my personal portfolio website. It brings together my software projects, 
 ## What's inside
 
 - **About me:** a short introduction, my degree, an "open to internships & graduate roles" status, and links to my resume, GitHub, LinkedIn and email.
-- **Highlights:** key numbers at a glance: my average Dean's List GPA, projects built, leadership roles, and the size of the largest event I led.
+- **Highlights:** key numbers at a glance: my CGPA, projects built and leadership roles.
 - **Featured projects:** four in-depth project showcases:
   - **HavaPaw**: an IoT smart dog collar and Flutter app for health and location monitoring (Final Year Project)
   - **Nomly**: an AI-powered meal-planning and pantry management web app
@@ -15,7 +15,7 @@ This is my personal portfolio website. It brings together my software projects, 
   - **Halabo Indonesia Tour**: a travel booking website
 
   Each one shows what the project does, my role, what I built, the tech stack, screenshots, and a link to the code, plus a full **case study**: the problem, what was built, my part, and the results.
-- **More projects:** my other work, filterable by AI, Games & VR and Web: Peatland Alert System (IBM Z Datathon), Stonehold VR, Monster Merger TD, Grabot (UMHackathon), Currency Detector, Pac-Man AI and Obstacles Unity.
+- **More projects:** my other work, filterable by AI and Games & VR: Peatland Alert System (IBM Z Datathon), Stonehold VR, Monster Merger TD, Grabot (UMHackathon), Currency Detector, Pac-Man AI and Obstacles Unity.
 - **Leadership & experience:** my roles in student organisations, events and volunteering (XMUM AI Club, International Student Ambassador programme and more), plus part-time work at the university, with photos and certificates.
 - **Awards & certificates:** Dean's List awards, scholarship, hackathons and certifications.
 - **Skills:** programming languages, web and mobile frameworks, AI tools, game engines, testing tools and design software.
