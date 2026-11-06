@@ -179,7 +179,9 @@
   .exp .when { color: var(--muted); font-size: .8rem; white-space: nowrap; grid-column: 2; grid-row: 1; font-weight: 500;
                background: var(--bg-2); padding: 2px 10px; border-radius: 999px; align-self: start; }
   .exp p { grid-column: 1 / -1; color: var(--muted); font-size: .92rem; margin-top: 6px; }
-  .also { color: var(--muted); font-size: .92rem; margin-top: 22px; padding-left: 32px; }
+  .exp-group { font-size: 1.05rem; color: var(--accent-strong); margin: 40px 0 16px; display: flex; align-items: center; gap: 12px; }
+  .exp-group:first-of-type { margin-top: 0; }
+  .exp-group::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
   /* Awards */
   .awards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
@@ -255,7 +257,6 @@
     .timeline { padding-left: 26px; }
     .timeline::before { left: 6px; }
     .exp::before { left: -26px; }
-    .also { padding-left: 0; }
     .cta { padding: 48px 20px; border-radius: 22px; }
   }
 </style>
@@ -399,25 +400,42 @@ const SITE = {
     { image: "images/design-poster-2", caption: "Event poster, International Student Ambassador" },
   ],
 
+  // Grouped under three headings. Photos: images/<slug>-1, -2, ... (same as projects).
   experience: [
-    { slug: "sponsorship", title: "Head of Sponsorship", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Oct 2024 – Oct 2025",
-      text: "Led sponsor outreach and negotiations, and brought industry partners such as Huawei on campus for talks and company visits." },
-    { slug: "huawei-day", title: "Person-in-Charge & Emcee, Huawei Day: Intelligent World 2030", org: "XMUM AI Club", when: "Feb – Apr 2025",
-      text: "Main contact with Huawei's manager. Directed five committee divisions from planning to execution, for an event with 150+ attendees." },
-    { slug: "isa-briefing", title: "Vice Organizing Chairperson, International Student Briefing", org: "XMUM International Student Ambassador (ISA)", when: "May – Oct 2026",
-      text: "Planned the schedule, catering, registration and crowd-control positions, reviewed the presentation slides, and coordinated helpers on the day." },
-    { slug: "isa-treasurer", title: "Treasurer", org: "XMUM International Student Ambassador (ISA)", when: "Jun 2024 – Nov 2026",
-      text: "Tracked the organisation's funds, prepared event financial reports, and planned budgets with event leads." },
-    { slug: "dpickleball", title: "Vice Organizing Chairperson, dPickleball", org: "XMUM AI Club", when: "Apr 2025 – present",
-      text: "Connected the design, outreach and sponsorship teams, managed the secretaries, and reviewed every poster and post before publishing." },
-    { slug: "global-carnival", title: "Secretary, Global Carnival 2026", org: "XMUM International Student Ambassador (ISA)", when: "Dec 2025 – May 2026",
-      text: "Ran documentation, registration records, forms and announcements across committees for one of XMUM's largest multicultural events." },
-    { slug: "cs-go", title: "Project Leader, CS Go Community Service", org: "Xiamen University Malaysia", when: "Apr – Jul 2024",
-      text: "Led six committees to design and install campus signage and navigation maps, after getting approval from the maintenance department." },
-    { slug: "student-helper", title: "Student Helper (part-time)", org: "Xiamen University Malaysia", when: "Dec 2024 – Oct 2026",
+    // ---- Organisations ----
+    { group: "Organisations", slug: "sponsorship", title: "Head of Sponsorship", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Oct 2024 – Oct 2025",
+      text: "Led sponsor outreach and negotiations, worked with the events, design and publicity teams so sponsors got proper recognition, and brought companies such as Huawei on campus for talks and company visits." },
+    { group: "Organisations", slug: "isa-treasurer", title: "Treasurer", org: "XMUM International Student Ambassador (ISA)", when: "Jun 2024 – Nov 2026",
+      text: "Tracked the organisation's funds, prepared event financial reports and planned budgets. As an ambassador, also ran briefings and arrival support for new international students." },
+    { group: "Organisations", slug: "student-council", title: "Pastoral Member, Student Council", org: "Kanaan Global School", when: "Jul 2017 – Jun 2018",
+      text: "Helped plan, set up and run school-wide events, and supported student welfare." },
+
+    // ---- Events & volunteering ----
+    { group: "Events & volunteering", slug: "isa-briefing", title: "Vice Organizing Chairperson, International Student Briefing", org: "XMUM International Student Ambassador (ISA)", when: "May – Oct 2026",
+      text: "Planned the schedule, catering, registration and crowd-control positions, reviewed the presentation slides, and recruited and coordinated helpers on the day." },
+    { group: "Events & volunteering", slug: "global-carnival", title: "Secretary, Global Carnival 2026", org: "XMUM International Student Ambassador (ISA)", when: "Dec 2025 – May 2026",
+      text: "Ran documentation, meeting records, registration data, forms and announcements across committees for one of XMUM's largest multicultural events, and tracked deadlines." },
+    { group: "Events & volunteering", slug: "dpickleball", title: "Vice Organizing Chairperson, dPickleball", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Apr – Nov 2025",
+      text: "Connected the design, outreach and sponsorship teams, managed the secretaries, checked proposals, and reviewed every poster and post before publishing." },
+    { group: "Events & volunteering", slug: "huawei-day", title: "Person-in-Charge & Emcee, Huawei Day: Intelligent World 2030", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Feb – Apr 2025",
+      text: "Main contact with Huawei's manager. Directed five committee divisions from planning to execution for an event with 150+ attendees, and emceed on the day." },
+    { group: "Events & volunteering", slug: "explore-malacca", title: "Treasurer, Explore Malaysia: Malacca", org: "XMUM International Student Ambassador (ISA)", when: "Oct – Dec 2024",
+      text: "Managed the budget and financial reporting for a cultural trip with 44 participants, collected payments by bank, e-wallet and cash, and paid vendors for food, tickets, the tour guide and first aid." },
+    { group: "Events & volunteering", slug: "carnival-sponsorship", title: "Sponsorship Team, Global Carnival", org: "XMUM International Student Ambassador (ISA)", when: "Jun – Dec 2024",
+      text: "Found and approached potential sponsors, and helped run fundraising, including making and selling s'mores." },
+    { group: "Events & volunteering", slug: "makrab", title: "Game Master, MAKRAB", org: "PPI Xiamen University Malaysia – Garuda Dwi Pantara", when: "Aug – Oct 2024",
+      text: "Planned game structures, rules and schedules, and prepared props for a bonding event welcoming new Indonesian students." },
+    { group: "Events & volunteering", slug: "cs-go", title: "Project Leader, CS Go Community Service", org: "Xiamen University Malaysia", when: "Apr – Jul 2024",
+      text: "Led six committees to design and install signage arrows and navigation maps across campus buildings, handling the timeline, budget and approval from the maintenance department." },
+    { group: "Events & volunteering", slug: "orientation", title: "Game Master, Crescendo Orientation", org: "Xiamen University Malaysia", when: "Jun – Sep 2024",
+      text: "Designed activities, set rules and guided new students through games during university orientation." },
+    { group: "Events & volunteering", slug: "tzu-chi", title: "Community Service Officer", org: "Kanaan Global School · Tzu Chi Recycling Center", when: "Jul 2017 – Jun 2018",
+      text: "Volunteered every Sunday sorting paper, metal and plastic for recycling, completing 15 hours of service." },
+
+    // ---- Part-time work ----
+    { group: "Part-time work", slug: "student-helper", title: "Student Helper", org: "Xiamen University Malaysia", when: "Dec 2024 – Oct 2026",
       text: "Briefing-session helper across six intakes (VOC and crowd control in 2026/09), arrival helper for new international students, registration-day check-in, and convocation usher." },
   ],
-  alsoExperience: "Also: Treasurer for the Explore Malaysia: Malacca trip (44 participants), Global Carnival sponsorship team, and Game Master for Crescendo Orientation and PPI MAKRAB.",
 
   awards: [
     { slug: "deans-list", title: "Dean's List, three semesters", by: "Xiamen University Malaysia", text: "GPA 3.94 (2025/04), 3.88 (2025/09), 3.93 (2026/04)." },
@@ -493,9 +511,8 @@ const SITE = {
   <section id="experience" class="alt"><div class="wrap">
     <div class="eyebrow">Beyond code</div>
     <h2>Leadership & experience</h2>
-    <p class="lead">Student organisations and part-time work at Xiamen University Malaysia.</p>
+    <p class="lead">Student organisations, events, volunteering and part-time work.</p>
     <div class="timeline" id="timeline"></div>
-    <p class="also" id="also"></p>
   </div></section>
 
   <section id="awards"><div class="wrap">
@@ -707,15 +724,17 @@ const SITE = {
     $("design-section").hidden = false;
   });
 
-  // Experience
-  $("timeline").innerHTML = SITE.experience.map(e => `
-    <article class="exp reveal">
-      <h3>${esc(e.title)}</h3>
-      <span class="when">${esc(e.when)}</span>
-      <span class="org">${esc(e.org)}</span>
-      <p>${esc(e.text)}</p>
-    </article>`).join("");
-  $("also").textContent = SITE.alsoExperience || "";
+  // Experience, grouped under headings in the order they first appear
+  const groups = [...new Set(SITE.experience.map(e => e.group || ""))];
+  $("timeline").outerHTML = groups.map(g => `
+    ${g ? `<h3 class="exp-group">${esc(g)}</h3>` : ""}
+    <div class="timeline">${SITE.experience.map((e, i) => (e.group || "") !== g ? "" : `
+      <article class="exp reveal" data-i="${i}">
+        <h3>${esc(e.title)}</h3>
+        <span class="when">${esc(e.when)}</span>
+        <span class="org">${esc(e.org)}</span>
+        <p>${esc(e.text)}</p>
+      </article>`).join("")}</div>`).join("");
 
   // Photo thumbnails (certificates, event photos) for experience and awards.
   // Shows up to 4; the 4th says "+N" when there are more. Click opens the full-screen viewer.
@@ -736,7 +755,7 @@ const SITE = {
     });
     target.appendChild(row);
   }
-  document.querySelectorAll("#timeline .exp").forEach((el, i) => addThumbs(el, SITE.experience[i].slug, SITE.experience[i].title));
+  document.querySelectorAll("#experience .exp").forEach(el => { const e = SITE.experience[el.dataset.i]; addThumbs(el, e.slug, e.title); });
 
   // Awards
   $("award-list").innerHTML = SITE.awards.map(a => `
