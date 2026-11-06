@@ -4,9 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Keisha Nalani Shielim · Software Engineer Portfolio</title>
-<meta name="description" content="Keisha Nalani Shielim, Software Engineering student at Xiamen University Malaysia. Mobile, full-stack, AI, IoT and game projects.">
+<meta name="description" content="Final-year Software Engineering student at Xiamen University Malaysia. Mobile, full-stack, AI, IoT and game projects, plus leadership and awards.">
 <meta name="theme-color" content="#14111a">
+<!-- Link preview (LinkedIn, WhatsApp, email…) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://knshielim.github.io/">
+<meta property="og:title" content="Keisha Nalani Shielim · Software Engineer Portfolio">
+<meta property="og:description" content="Mobile, full-stack, AI, IoT and game projects by a final-year Software Engineering student at Xiamen University Malaysia.">
+<meta property="og:image" content="https://knshielim.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Keisha Nalani Shielim, Software Engineering Student portfolio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://knshielim.github.io/og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%23a897c9' stroke='%237b6a9b' stroke-width='2'%3E%3Cellipse cx='32' cy='17' rx='9.5' ry='14' transform='rotate(0 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='9.5' ry='14' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='9.5' ry='14' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='9.5' ry='14' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='9.5' ry='14' transform='rotate(288 32 32)'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='8.5' fill='%23dcc089' stroke='%23a9823f' stroke-width='2'/%3E%3C/svg%3E">
+<script>
+  // Apply a saved light/dark choice before the page paints.
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -15,32 +30,44 @@
   :root {
     --bg: #f7f5fa; --bg-2: #efebf5; --surface: #ffffff; --text: #221d2b; --muted: #635a72;
     --border: #e3dded; --accent: #7b6a9b; --accent-strong: #5e4e7e; --accent-soft: #ece6f5;
-    --gold: #a9823f; --gold-soft: #f5ecdc; --media: #1c1824;
+    --gold: #a9823f; --gold-soft: #f5ecdc; --media: #1c1824; --green: #2f9e6a;
     --shadow: 0 1px 2px rgba(40,30,60,.05), 0 8px 24px rgba(40,30,60,.06);
     --shadow-hover: 0 2px 4px rgba(40,30,60,.06), 0 16px 40px rgba(60,40,90,.12);
-    --on-accent: #ffffff;
+    --on-accent: #ffffff; color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #14111a; --bg-2: #1a1621; --surface: #1e1927; --text: #eeeaf4; --muted: #a79eb6;
+    --border: #2e2738; --accent: #b3a4cf; --accent-strong: #cdc1e3; --accent-soft: #2a2337;
+    --gold: #dcc089; --gold-soft: #2c261d; --media: #110e16; --green: #4fd59a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    --shadow-hover: 0 2px 4px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.45);
+    --on-accent: #14111a; color-scheme: dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #14111a; --bg-2: #1a1621; --surface: #1e1927; --text: #eeeaf4; --muted: #a79eb6;
       --border: #2e2738; --accent: #b3a4cf; --accent-strong: #cdc1e3; --accent-soft: #2a2337;
-      --gold: #dcc089; --gold-soft: #2c261d; --media: #110e16;
+      --gold: #dcc089; --gold-soft: #2c261d; --media: #110e16; --green: #4fd59a;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
       --shadow-hover: 0 2px 4px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.45);
-      --on-accent: #14111a;
+      --on-accent: #14111a; color-scheme: dark;
     }
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; scroll-padding-top: 72px; }
   body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65;
-         -webkit-font-smoothing: antialiased; }
+         -webkit-font-smoothing: antialiased; transition: background .3s, color .3s; }
+  body.locked { overflow: hidden; }
   ::selection { background: var(--accent); color: var(--on-accent); }
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-strong); }
-  h1, h2, h3 { font-family: "Plus Jakarta Sans", Inter, sans-serif; letter-spacing: -.015em; }
+  button { font: inherit; color: inherit; }
+  h1, h2, h3, h4 { font-family: "Plus Jakarta Sans", Inter, sans-serif; letter-spacing: -.015em; }
   .wrap { max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
   ul { padding-left: 0; list-style: none; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   /* Section headings */
   section { padding: 88px 0; }
@@ -51,24 +78,53 @@
   h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); line-height: 1.2; }
   .lead { color: var(--muted); margin: 10px 0 36px; max-width: 620px; }
 
-  /* Nav */
-  nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 80%, transparent);
+  /* Flower motif */
+  .flower { display: inline-block; flex-shrink: 0; }
+  .flower .petals { fill: var(--accent); }
+  .flower .center { fill: var(--gold); }
+
+  /* ---------------- Nav ---------------- */
+  nav { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 80%, transparent);
         backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
   nav.scrolled { border-bottom-color: var(--border); }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-  nav .brand { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; color: var(--text); white-space: nowrap; font-size: 1.05rem; }
-  nav .brand span { color: var(--gold); }
-  nav .menu { display: flex; gap: 4px; font-size: .9rem; overflow-x: auto; scrollbar-width: none; }
+  nav .brand { display: inline-flex; align-items: center; gap: 9px; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800;
+               color: var(--text); white-space: nowrap; font-size: 1.08rem; }
+  nav .brand:hover { color: var(--text); }
+  nav .brand .flower { width: 24px; height: 24px; transition: transform .6s; }
+  nav .brand:hover .flower { transform: rotate(72deg); }
+  .nav-right { display: flex; align-items: center; gap: 6px; }
+  nav .menu { display: flex; gap: 2px; font-size: .9rem; }
   nav .menu a { color: var(--muted); white-space: nowrap; padding: 6px 12px; border-radius: 999px; transition: background .2s, color .2s; }
   nav .menu a:hover { color: var(--text); background: var(--accent-soft); }
   nav .menu a.active { color: var(--accent-strong); background: var(--accent-soft); }
+  .icon-btn { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface);
+              display: grid; place-items: center; cursor: pointer; color: var(--text); transition: border-color .2s, transform .2s; }
+  .icon-btn:hover { border-color: var(--accent); }
+  .icon-btn svg { width: 18px; height: 18px; }
+  #theme-toggle .sun { display: none; }
+  :root[data-theme="dark"] #theme-toggle .sun { display: block; }
+  :root[data-theme="dark"] #theme-toggle .moon { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) #theme-toggle .sun { display: block; }
+    :root:not([data-theme="light"]) #theme-toggle .moon { display: none; }
+  }
+  #menu-toggle { display: none; }
+  #menu-toggle .x { display: none; }
+  nav.open #menu-toggle .x { display: block; }
+  nav.open #menu-toggle .bars { display: none; }
 
-  /* Hero */
+  /* ---------------- Hero ---------------- */
   .hero-bg { position: relative; overflow: hidden; }
   .hero-bg::before, .hero-bg::after { content: ""; position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
   .hero-bg::before { width: 520px; height: 520px; top: -220px; left: -120px; background: var(--accent); opacity: .22; }
   .hero-bg::after { width: 420px; height: 420px; bottom: -220px; right: -80px; background: var(--gold); opacity: .14; }
-  header.wrap { position: relative; padding-top: 88px; padding-bottom: 96px; }
+  .hero-flower { position: absolute; width: 440px; height: 440px; right: -110px; top: 20px; opacity: .07; pointer-events: none;
+                 animation: spin 90s linear infinite; }
+  .hero-flower .petals { fill: none; stroke: var(--accent); stroke-width: .6; }
+  .hero-flower .center { fill: none; stroke: var(--gold); stroke-width: .6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  header.wrap { position: relative; padding-top: 80px; padding-bottom: 72px; }
   .hero { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
   .avatar-ring { padding: 4px; border-radius: 50%; background: linear-gradient(140deg, var(--accent), var(--gold)); flex-shrink: 0;
                  box-shadow: 0 20px 50px color-mix(in srgb, var(--accent) 30%, transparent); }
@@ -77,6 +133,12 @@
             color: var(--accent); font-family: "Plus Jakarta Sans", sans-serif; font-size: 3rem; font-weight: 800; }
   .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-text { flex: 1; min-width: 260px; }
+  .status { display: inline-flex; align-items: center; gap: 9px; font-size: .84rem; font-weight: 600; padding: 6px 14px 6px 12px;
+            border-radius: 999px; background: color-mix(in srgb, var(--green) 12%, transparent);
+            color: var(--green); border: 1px solid color-mix(in srgb, var(--green) 30%, transparent); margin-bottom: 18px; }
+  .status .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .status .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green); animation: pulse 2s ease-out infinite; }
+  @keyframes pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3); opacity: 0; } }
   .hello { color: var(--gold); font-weight: 600; margin-bottom: 6px; }
   .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.05; font-weight: 800; }
   .role { font-size: 1.12rem; color: var(--accent); font-weight: 600; margin: 14px 0 14px; }
@@ -87,23 +149,34 @@
   .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
   .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
   .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; border: 1px solid var(--border);
-         background: var(--surface); color: var(--text); font-weight: 600; font-size: .92rem; transition: transform .15s, border-color .2s, box-shadow .2s; }
+         background: var(--surface); color: var(--text); font-weight: 600; font-size: .92rem; cursor: pointer;
+         transition: transform .15s, border-color .2s, box-shadow .2s; }
   .btn:hover { border-color: var(--accent); color: var(--text); transform: translateY(-1px); }
   .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: var(--on-accent); border-color: transparent;
                  box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 35%, transparent); }
   .btn.primary:hover { color: var(--on-accent); box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 45%, transparent); }
-  .btn svg { width: 16px; height: 16px; }
+  .btn.square { padding: 10px 12px; }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  /* Featured */
+  /* Stats strip */
+  .stats { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 56px; background: var(--surface);
+           border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
+  .stat { padding: 22px 24px; position: relative; }
+  .stat + .stat::before { content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 1px; background: var(--border); }
+  .stat .num { font-family: "Plus Jakarta Sans", sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.2rem); font-weight: 800; line-height: 1.1;
+               background: linear-gradient(120deg, var(--accent-strong), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat .lbl { color: var(--muted); font-size: .86rem; margin-top: 4px; }
+
+  /* ---------------- Featured ---------------- */
   .featured { display: grid; gap: 32px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow);
-          display: grid; grid-template-columns: 1.05fr 1fr; transition: box-shadow .25s, border-color .25s, transform .25s; }
+          display: grid; grid-template-columns: 1.05fr 1fr; transition: box-shadow .25s, border-color .25s; }
   .card:hover { box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
   .card:nth-child(even) { grid-template-columns: 1fr 1.05fr; }
   .card:nth-child(even) .shots { order: 2; }
   .shots { position: relative; min-height: 340px; background: var(--media); overflow: hidden; }
   .shots .backdrop { position: absolute; inset: -40px; background-size: cover; background-position: center;
-                     filter: blur(36px) saturate(1.2) brightness(.55); transition: background-image .35s; }
+                     filter: blur(36px) saturate(1.2) brightness(.55); }
   .shots .slide { position: absolute; inset: 22px; width: calc(100% - 44px); height: calc(100% - 44px); object-fit: contain; cursor: zoom-in;
                   opacity: 0; transition: opacity .4s; pointer-events: none; filter: drop-shadow(0 12px 28px rgba(0,0,0,.45)); }
   .shots .slide.on { opacity: 1; pointer-events: auto; z-index: 1; }
@@ -128,28 +201,35 @@
   .card .body { padding: 34px; display: flex; flex-direction: column; gap: 12px; }
   .meta { font-size: .74rem; text-transform: uppercase; letter-spacing: .09em; color: var(--gold); font-weight: 600; }
   .card h3 { font-size: 1.4rem; line-height: 1.25; }
-  .card h3 small { display: block; font-family: Inter, sans-serif; font-size: .98rem; font-weight: 500; color: var(--muted); letter-spacing: 0; margin-top: 4px; }
+  .card h3 small, .modal-head h3 small { display: block; font-family: Inter, sans-serif; font-size: .98rem; font-weight: 500; color: var(--muted); letter-spacing: 0; margin-top: 4px; }
   .card p { color: var(--muted); }
   .roleline { font-size: .9rem; background: var(--accent-soft); border-radius: 10px; padding: 8px 12px; color: var(--text); }
   .roleline strong { color: var(--accent-strong); }
-  .card ul { font-size: .93rem; display: grid; gap: 8px; }
-  .card li { color: var(--muted); position: relative; padding-left: 20px; }
-  .card li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px;
-                     background: var(--accent); transform: rotate(45deg); }
+  .bullets { font-size: .93rem; display: grid; gap: 8px; }
+  .bullets li { color: var(--muted); position: relative; padding-left: 20px; }
+  .bullets li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px;
+                        background: var(--accent); transform: rotate(45deg); }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .tag { font-size: .76rem; padding: 4px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); font-weight: 500; }
   .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 10px; }
 
-  /* Other projects */
+  /* ---------------- Other projects + filter ---------------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -12px 0 26px; }
+  .filters button { padding: 7px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); cursor: pointer;
+                    font-size: .88rem; font-weight: 600; color: var(--muted); transition: all .2s; }
+  .filters button:hover { color: var(--text); border-color: var(--accent); }
+  .filters button.on { background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: var(--on-accent); border-color: transparent; }
+  .filters button .n { opacity: .7; font-weight: 500; margin-left: 4px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
   .mini { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: var(--shadow);
-          display: flex; flex-direction: column; gap: 10px; transition: transform .25s, box-shadow .25s, border-color .25s; overflow: hidden; }
+          display: flex; flex-direction: column; gap: 10px; transition: transform .25s, box-shadow .25s, border-color .25s, opacity .3s; overflow: hidden; }
   .mini:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+  .mini.hide { display: none; }
   .mini h3 { font-size: 1.15rem; }
   .mini p { color: var(--muted); font-size: .92rem; }
   .mini .actions { gap: 8px; }
   .pill { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; font-weight: 600; padding: 6px 14px; border-radius: 999px;
-          border: 1px solid var(--border); color: var(--text); transition: border-color .2s, background .2s; }
+          border: 1px solid var(--border); color: var(--text); background: transparent; cursor: pointer; transition: border-color .2s, background .2s; }
   .pill:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--text); }
   .pill.gold { border-color: color-mix(in srgb, var(--gold) 50%, transparent); background: var(--gold-soft); }
   .pill svg { width: 14px; height: 14px; }
@@ -159,14 +239,17 @@
   .mini:hover .mthumb img { transform: scale(1.04); }
   .mthumb .count { top: auto; bottom: 12px; }
 
-  /* Design */
+  /* ---------------- Design ---------------- */
   .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
   .gallery figure { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
   .gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; cursor: zoom-in; transition: transform .4s; }
   .gallery figure:hover img { transform: scale(1.04); }
   .gallery figcaption { padding: 12px 16px; font-size: .88rem; color: var(--muted); position: relative; background: var(--surface); }
 
-  /* Experience timeline */
+  /* ---------------- Experience ---------------- */
+  .exp-group { font-size: 1.05rem; color: var(--accent-strong); margin: 40px 0 16px; display: flex; align-items: center; gap: 12px; }
+  .exp-group:first-of-type { margin-top: 0; }
+  .exp-group::after { content: ""; flex: 1; height: 1px; background: var(--border); }
   .timeline { position: relative; display: grid; gap: 16px; padding-left: 32px; }
   .timeline::before { content: ""; position: absolute; left: 9px; top: 8px; bottom: 8px; width: 2px;
                       background: linear-gradient(var(--accent), var(--gold)); opacity: .5; border-radius: 2px; }
@@ -180,19 +263,6 @@
   .exp .when { color: var(--muted); font-size: .8rem; white-space: nowrap; grid-column: 2; grid-row: 1; font-weight: 500;
                background: var(--bg-2); padding: 2px 10px; border-radius: 999px; align-self: start; }
   .exp p { grid-column: 1 / -1; color: var(--muted); font-size: .92rem; margin-top: 6px; }
-  .exp-group { font-size: 1.05rem; color: var(--accent-strong); margin: 40px 0 16px; display: flex; align-items: center; gap: 12px; }
-  .exp-group:first-of-type { margin-top: 0; }
-  .exp-group::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-
-  /* Awards */
-  .awards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
-  .award { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
-  .award .icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
-                 background: var(--gold-soft); color: var(--gold); }
-  .award .icon svg { width: 22px; height: 22px; }
-  .award h3 { font-size: 1rem; line-height: 1.35; }
-  .award .by { color: var(--accent); font-size: .85rem; font-weight: 500; }
-  .award p { color: var(--muted); font-size: .9rem; margin-top: 4px; }
 
   /* Photo thumbnails on experience & award cards */
   .thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; grid-column: 1 / -1; }
@@ -204,15 +274,24 @@
                   color: #fff; font-weight: 700; font-size: .95rem; }
   .award .thumbs button { width: 80px; height: 60px; }
 
-  /* Skills */
+  /* ---------------- Awards ---------------- */
+  .awards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+  .award { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .award .icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+                 background: var(--gold-soft); color: var(--gold); }
+  .award .icon svg { width: 22px; height: 22px; }
+  .award h3 { font-size: 1rem; line-height: 1.35; }
+  .award .by { color: var(--accent); font-size: .85rem; font-weight: 500; }
+  .award p { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+
+  /* ---------------- Skills ---------------- */
   .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
   .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; box-shadow: var(--shadow); }
   .skill-group h3 { font-size: 1rem; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-  .g-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0;
-            background: var(--gold-soft); color: var(--gold); }
+  .g-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; background: var(--gold-soft); color: var(--gold); }
   .g-icon svg { width: 18px; height: 18px; }
 
-  /* Spoken languages */
+  /* ---------------- Spoken languages ---------------- */
   .langs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
   .lang { display: flex; align-items: center; gap: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
           padding: 22px; box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
@@ -230,18 +309,58 @@
                  padding: 3px 9px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); }
   .lang .badge.soft { background: var(--accent-soft); color: var(--accent-strong); }
 
-  /* Contact */
+  /* ---------------- Contact ---------------- */
   .cta { position: relative; overflow: hidden; border-radius: 28px; padding: 64px 32px; text-align: center; border: 1px solid var(--border);
          background: radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 55%),
                      radial-gradient(circle at 90% 100%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 50%), var(--surface); }
+  .cta > .flower { width: 44px; height: 44px; margin-bottom: 14px; animation: spin 24s linear infinite; }
+  .cta .eyebrow { display: flex; justify-content: center; }
   .cta .eyebrow::before { display: none; }
   .cta h2 { font-size: clamp(1.9rem, 5vw, 2.6rem); }
   .cta p { color: var(--muted); margin: 12px auto 28px; max-width: 520px; }
   .cta .links { justify-content: center; margin-top: 0; }
-  .copyright { text-align: center; color: var(--muted); font-size: .82rem; padding: 32px 0 40px; }
+  footer.copyright { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: .82rem; padding: 32px 0 40px; }
+  footer.copyright .flower { width: 14px; height: 14px; }
 
-  /* Lightbox */
-  .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(14,11,19,.94); display: none; backdrop-filter: blur(6px);
+  /* ---------------- Toast ---------------- */
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 200; opacity: 0; pointer-events: none;
+           background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 12px; font-weight: 600; font-size: .9rem;
+           display: flex; align-items: center; gap: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: opacity .25s, transform .25s; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast svg { width: 16px; height: 16px; color: var(--green); }
+
+  /* ---------------- Case study modal ---------------- */
+  .modal { position: fixed; inset: 0; z-index: 90; display: none; align-items: flex-start; justify-content: center;
+           background: rgba(14,11,19,.7); backdrop-filter: blur(6px); overflow-y: auto; padding: 40px 16px; }
+  .modal.open { display: flex; animation: fade .25s ease; }
+  @keyframes fade { from { opacity: 0; } }
+  .modal-panel { position: relative; width: 100%; max-width: 860px; background: var(--surface); border: 1px solid var(--border);
+                 border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: hidden; animation: rise .3s ease; }
+  @keyframes rise { from { transform: translateY(16px); } }
+  .modal-close { position: absolute; top: 14px; right: 14px; z-index: 3; }
+  .modal-hero { position: relative; height: 300px; background: var(--media); overflow: hidden; }
+  .modal-hero.empty { height: 140px; background: radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--gold) 45%, transparent), transparent 55%), linear-gradient(140deg, #6d5d8f, #3d3352); }
+  .modal-hero .backdrop { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(36px) brightness(.55); }
+  .modal-hero img { position: absolute; inset: 20px; width: calc(100% - 40px); height: calc(100% - 40px); object-fit: contain; cursor: zoom-in; }
+  .modal-body { padding: 32px 36px 36px; display: grid; gap: 26px; }
+  .modal-head h3 { font-size: 1.8rem; line-height: 1.2; margin-top: 6px; }
+  .modal-body h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 10px;
+                   display: flex; align-items: center; gap: 8px; }
+  .modal-body h4 .flower { width: 14px; height: 14px; }
+  .modal-body p { color: var(--muted); }
+  .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .result { background: var(--bg-2); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .result .v { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 1.5rem; line-height: 1.15;
+               background: linear-gradient(120deg, var(--accent-strong), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .result .l { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+  .modal-gallery { display: flex; flex-wrap: wrap; gap: 10px; }
+  .modal-gallery button { width: 120px; height: 84px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); padding: 0;
+                          background: var(--media); cursor: zoom-in; transition: border-color .2s; }
+  .modal-gallery button:hover { border-color: var(--gold); }
+  .modal-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---------------- Lightbox ---------------- */
+  .lightbox { position: fixed; inset: 0; z-index: 120; background: rgba(14,11,19,.94); display: none; backdrop-filter: blur(6px);
               align-items: center; justify-content: center; flex-direction: column; padding: 56px 16px 24px; }
   .lightbox.open { display: flex; }
   .lightbox img { max-width: 100%; max-height: calc(100vh - 120px); object-fit: contain; border-radius: 8px; }
@@ -256,29 +375,43 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
-    * { transition: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 
-  @media (max-width: 820px) {
+  /* ---------------- Responsive ---------------- */
+  @media (max-width: 860px) {
+    #menu-toggle { display: grid; }
+    nav .menu { position: absolute; top: 64px; left: 12px; right: 12px; flex-direction: column; gap: 2px; padding: 10px;
+                background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-hover);
+                opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+    nav.open .menu { opacity: 1; transform: none; pointer-events: auto; }
+    nav .menu a { padding: 12px 14px; border-radius: 10px; font-size: 1rem; }
     .card, .card:nth-child(even) { grid-template-columns: 1fr; }
     .card:nth-child(even) .shots { order: 0; }
     .shots { min-height: 260px; }
     .card .body { padding: 24px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3)::before { display: none; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
+    .hero-flower { width: 300px; height: 300px; right: -120px; top: 0; }
   }
   @media (max-width: 640px) {
     section { padding: 64px 0; }
-    header.wrap { padding-top: 48px; padding-bottom: 64px; }
+    header.wrap { padding-top: 40px; padding-bottom: 56px; }
     .hero { gap: 26px; }
     .avatar { width: 128px; height: 128px; font-size: 2.2rem; }
-    nav .brand { display: none; }
-    nav .wrap { justify-content: center; }
-    nav .menu a { padding: 6px 10px; font-size: .85rem; }
+    .stats { margin-top: 40px; }
+    .stat { padding: 18px; }
     .exp { grid-template-columns: 1fr; padding: 18px; }
     .exp .when { grid-column: 1; grid-row: auto; justify-self: start; margin: 4px 0; }
     .timeline { padding-left: 26px; }
     .timeline::before { left: 6px; }
     .exp::before { left: -26px; }
     .cta { padding: 48px 20px; border-radius: 22px; }
+    .modal { padding: 0; }
+    .modal-panel { border-radius: 0; min-height: 100%; }
+    .modal-hero { height: 220px; }
+    .modal-body { padding: 24px 20px 32px; }
   }
 </style>
 </head>
@@ -288,15 +421,12 @@
 /* =====================================================================
    EDIT YOUR CONTENT HERE.
    IMAGES: put them in the images/ folder, named  <slug>-1, <slug>-2, ...
-   Any number per project, .jpg / .jpeg / .png / .webp all work, e.g.
+   Any number per item, .jpg / .jpeg / .png / .webp all work, e.g.
      images/nomly-1.png  images/nomly-2.jpg  images/nomly-3.png
    Numbers must go 1, 2, 3 with no gaps (it stops at the first missing one).
-   Each project's slug is written next to its title below.
-   Leadership & experience and Awards entries work the same way, e.g.
-     images/huawei-day-1.jpg  images/deans-list-1.png  images/deans-list-2.png
+   Projects, Leadership & experience and Awards each have a slug below.
    Profile photo: images/profile.jpg (or .png).
-   No images yet? Featured projects show a coloured title card, and the
-   Design section stays hidden, so the site never shows broken images.
+   Link preview picture: og-image.png in the main folder (next to index.html).
    ===================================================================== */
 const SITE = {
   name: "Keisha Nalani Shielim",
@@ -304,6 +434,14 @@ const SITE = {
   summary: "Final-year software engineering student who builds across the stack: Flutter and IoT, ASP.NET Core and React, LLM agents, and Unity games. I also lead student teams, from sponsorship deals to 150-person industry events.",
   chips: ["B.Eng (Hons) Software Engineering, 2023 – 2027", "Dean's List × 3", "100% tuition merit scholarship", "Based in Sepang, Selangor"],
   photo: "images/profile",
+  status: "Open to internships & graduate roles",   // badge above your name; set to "" to hide
+  // Numbers shown under your intro. decimals = how many decimal places to show.
+  stats: [
+    { value: 3.92, decimals: 2, label: "Average Dean's List GPA" },
+    { value: 11, label: "Projects built" },
+    { value: 14, label: "Leadership & volunteer roles" },
+    { value: 150, suffix: "+", label: "Attendees at an event I led" },
+  ],
   initials: "KS",
   links: {
     resume: "resume.pdf",
@@ -326,6 +464,22 @@ const SITE = {
       tech: ["Flutter", "Dart", "Firebase", "ESP32", "Arduino C++", "Python", "scikit-learn", "TensorFlow Lite", "OpenAI API"],
       role: "",
       slug: "havapaw",
+      caseStudy: {
+        context: "Final Year Project · Jun 2026 – present",
+        problem: "Dogs can't tell us when they feel unwell, and one-size-fits-all health thresholds don't suit every dog. HavaPaw learns each dog's own normal and tells the owner, in plain language, when readings drift away from it.",
+        built: [
+          "Smart collar: an ESP32 with GPS, heart rate, SpO₂, temperature and motion sensors. It pairs with the phone over Bluetooth and uploads over Wi-Fi to a secured cloud endpoint using a per-device token.",
+          "Mobile app: Flutter on Firebase (Auth, Firestore, Cloud Functions, Cloud Messaging) with live location tracking, safe-zone geofencing, health trends and push notifications.",
+          "Personal baselines: Cloud Functions compare every reading with the dog's own three-day baseline and send an alert when it drifts.",
+          "On-phone machine learning: a Random Forest classifier trained on generated data calibrated with public datasets, then distilled to TensorFlow Lite so it runs directly on the phone.",
+          "Virtual Vet: a GPT-4o assistant that explains each alert in plain language.",
+        ],
+        results: [
+          { value: "97.8%", label: "accuracy on held-out simulated pets" },
+          { value: "5", label: "sensors on one collar" },
+          { value: "On-device", label: "ML inference with TensorFlow Lite" },
+        ],
+      },
       github: "https://github.com/knshielim/SWE2309441_FlutterApp", demo: "",
     },
     {
@@ -341,6 +495,22 @@ const SITE = {
       tech: ["ASP.NET Core", "C#", "EF Core", "React", "Semantic Kernel", "LLM", "JWT"],
       role: "AI Assistant & pantry scanning developer",
       slug: "nomly",
+      caseStudy: {
+        context: "Programming Elective II (.NET) · 6-person team · Jun – Jul 2026",
+        problem: "Meal planning, pantry tracking and grocery lists usually live in different places. Nomly brings them together, with an AI assistant that works from your own recipes and what's already in your pantry.",
+        built: [
+          "Weekly meal planning that generates grocery lists.",
+          "Pantry tracking, with items added by scanning a receipt or photographing the food.",
+          "An AI assistant that suggests meals from saved recipes and pantry items.",
+          "JWT authentication with role-based access for users and admins, plus an admin panel.",
+        ],
+        myPart: [
+          "Built the AI assistant by integrating Semantic Kernel with an LLM.",
+          "Wrote a custom Semantic Kernel plugin that reads each user's saved recipes and meal plans, so the assistant can suggest meals, summarise recipes and generate weekly plans from their own data.",
+          "Restricted the AI features to authenticated users.",
+          "Developed the pantry scanning features: adding items from a grocery receipt or a photo of the food.",
+        ],
+      },
       github: "https://github.com/knshielim/Nomly_PE", demo: "",
     },
     {
@@ -356,6 +526,19 @@ const SITE = {
       tech: ["ASP.NET Core", "C#", "React", "SQL", "REST API"],
       role: "",
       slug: "tasktracker",
+      caseStudy: {
+        context: "Individual assignment · SWE310 (.NET) · Apr – May 2026",
+        problem: "When project updates are scattered across email and chat, teams lose track of who is doing what. TaskTracker keeps projects, task assignments, progress and discussion in one place.",
+        built: [
+          "Database: a normalised SQL schema of five entities (Users, Projects, Tasks, Comments, ProjectUpdates) with cascade and set-null delete rules to keep data consistent.",
+          "API: a RESTful ASP.NET Core Web API with full CRUD endpoints, DTOs, input validation and consistent HTTP error responses.",
+          "Frontend: a React dashboard with statistics and charts, searchable and filterable task tables, colour-coded status and priority labels, overdue highlighting, and in-context comments and project updates.",
+        ],
+        results: [
+          { value: "5", label: "related entities in the data model" },
+          { value: "Full CRUD", label: "REST API with validation" },
+        ],
+      },
       github: "https://github.com/knshielim/SWE2309441_SWE310_Assignment1", demo: "",
     },
     {
@@ -371,43 +554,83 @@ const SITE = {
       tech: ["Java", "JSP", "Servlets", "MySQL", "Tomcat"],
       role: "Website structure & destination content",
       slug: "halabo",
+      caseStudy: {
+        context: "Programming Elective II (Java EE) · 3-person team · Jun – Jul 2025",
+        problem: "Travellers need one place to discover Indonesian destinations, compare tour packages and book them, while the business needs to manage destinations, packages and bookings behind the scenes.",
+        built: [
+          "Visitors can browse destinations and packages, register, log in, book trips with payment and receive a confirmation.",
+          "An admin dashboard with full CRUD on destinations and packages, and views of users and bookings.",
+          "Session management, role-based access, and prepared statements to prevent SQL injection.",
+        ],
+        myPart: [
+          "Designed the overall site structure: page hierarchy, navigation flow, and the shared JSP header and footer used on every page.",
+          "Built the Destinations overview grid and the individual destination pages, which load details from MySQL and link to each destination's tour packages.",
+          "Wrote and curated captions, descriptions and images for 10+ destinations, including Borobudur, Bali, Raja Ampat and Komodo Island.",
+        ],
+        results: [
+          { value: "10+", label: "destinations written and curated" },
+        ],
+      },
       github: "https://github.com/knshielim/FinalProject_ProgrammingElective", demo: "",
     },
   ],
 
   other: [
     {
-      slug: "peatland", title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
+      slug: "peatland", categories: ["AI"], title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
       description: "AI early-warning system for Indonesian peatland fires. I built the decision agent that turns risk predictions into bilingual emergency alerts, with dispatch rules, incident clustering, cooldowns, and Gemini rephrasing behind guardrails. Written in standard-library Python to run on IBM LinuxONE.",
       tech: ["Python", "Gemini", "IBM LinuxONE"], github: "https://github.com/ProProcer/peatland-alert-system", demo: "",
+      caseStudy: {
+        context: "IBM Z Datathon · Agent Engineer · 5-person team · Oct 2026",
+        problem: "Peatland fires in Indonesia spread quickly and are hard to contain. Our team built an early-warning system that predicts fire risk 24–72 hours ahead, so responders can act sooner.",
+        built: [
+          "Combined weather, peatland and satellite fire-hotspot data to assess fire risk.",
+          "A machine learning pipeline that predicts potential fire hotspots within 24–72 hours.",
+          "An AI alert agent that generates response recommendations and bilingual Indonesian/English notifications.",
+          "A command-center dashboard that visualises fire risk and simulated emergency alerts.",
+        ],
+        myPart: [
+          "Built the decision agent that turns the model's fire-risk predictions into simulated emergency alerts, using a deterministic dispatch policy.",
+          "Critical cells trigger a dispatch to all five responder groups (Manggala Agni, MPA, BPBD, BRGM and leadership). High-risk cells with drying soil trigger SMS warnings and rewetting requests.",
+          "Clusters adjacent critical cells into one incident with a single target coordinate, prevents duplicate alerts with per-cell cooldowns, escalates only when severity rises, and routes responders to the nearest water source.",
+          "Bilingual messages come from structured templates. An optional Gemini step rephrases them behind guardrails that reject invented numbers, oversized SMS or missing simulation labels, and falls back to the templates if validation fails.",
+          "Wrote it in standard-library Python so it runs on IBM LinuxONE (s390x).",
+          "Beyond the team plan, added social media and email alerts, summary statistics, CSV export, an incident timeline, and a local HTTP API that serves all of this to the frontend.",
+        ],
+        results: [
+          { value: "24–72h", label: "advance fire-risk prediction" },
+          { value: "5", label: "responder groups in the dispatch policy" },
+          { value: "2", label: "alert languages (Indonesian & English)" },
+        ],
+      },
     },
     {
-      slug: "stonehold", title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
+      slug: "stonehold", categories: ["Games & VR"], title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
       description: "Google Cardboard castle exploration controlled only by gaze. A reusable gaze-interaction system, teleport pads, and 12+ interactions including a working drawbridge, scored archery and a day/night clock.",
       tech: ["Unity (URP)", "C#", "Google Cardboard"], github: "", demo: "https://drive.google.com/file/d/1O4Op5XPI2YuJ65S1-U3lFRodsUnCF1vd/view?usp=sharing",
     },
     {
-      slug: "monster-merger", title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
+      slug: "monster-merger", categories: ["Games & VR"], title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
       description: "Pixel-art tower defense with gacha summoning and unit merging. I built merging and Mythic combinations, the level manager, the boss trigger and the story dialogue system, and designed the UI sprites and screens.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/GAMEDEV", demo: "",
     },
     {
-      slug: "grabot", title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
+      slug: "grabot", categories: ["AI", "Web"], title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
       description: "Chat-based AI assistant for GrabFood merchants. I built the mock merchant data, daily report metrics, stock projections, low-stock alerts and the inventory update feature.",
       tech: ["Python", "Flask", "Gemini"], github: "https://github.com/ProProcer/mex-assistant-hackathon2", demo: "",
     },
     {
-      slug: "currency-detector", title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
+      slug: "currency-detector", categories: ["AI"], title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
       description: "Recognises Southeast Asian banknotes from a photo. I designed and trained a multi-output network that predicts country, denomination and year range from one image.",
       tech: ["Python", "TensorFlow", "Keras"], github: "https://github.com/knshielim/CurrencyDetector", demo: "",
     },
     {
-      slug: "pacman", title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
+      slug: "pacman", categories: ["Games & VR", "AI"], title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
       description: "Pac-Man in Godot. I programmed all four ghosts with distinct strategies (A* pursuit, predictive targeting, combined targeting, proximity switching) plus scatter, chase and frightened modes.",
       tech: ["Godot", "GDScript", "A* search"], github: "https://github.com/GlazeProgramming/Pac-Man-AI-Search", demo: "",
     },
     {
-      slug: "obstacles", title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
+      slug: "obstacles", categories: ["Games & VR"], title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
       description: "First-person obstacle course with Rigidbody physics, running, jumping and pushable objects across three sections.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/Obstacles_Unity", demo: "",
     },
@@ -485,24 +708,38 @@ const SITE = {
 };
 </script>
 
+<a class="sr-only" href="#projects">Skip to projects</a>
+
 <nav id="nav">
   <div class="wrap">
-    <a class="brand" href="#top">Keisha<span>.</span></a>
-    <div class="menu">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Leadership</a>
-      <a href="#awards">Awards</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+    <a class="brand" href="#top" aria-label="Keisha, back to top"><span data-flower></span>Keisha</a>
+    <div class="nav-right">
+      <div class="menu" id="menu">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Leadership</a>
+        <a href="#awards">Awards</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="icon-btn" id="theme-toggle" aria-label="Switch light or dark mode" title="Switch light or dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="icon-btn" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
     </div>
   </div>
 </nav>
 
 <div class="hero-bg">
+  <span class="hero-flower" data-flower aria-hidden="true"></span>
   <header class="wrap" id="top">
     <div class="hero">
       <div class="avatar-ring"><div class="avatar" id="avatar"></div></div>
       <div class="hero-text">
+        <div id="status"></div>
         <p class="hello">Hi, I'm</p>
         <h1 id="name"></h1>
         <div class="role" id="role"></div>
@@ -511,6 +748,7 @@ const SITE = {
         <div class="links" id="links"></div>
       </div>
     </div>
+    <div class="stats reveal" id="stats"></div>
   </header>
 </div>
 
@@ -518,14 +756,15 @@ const SITE = {
   <section id="projects" class="alt"><div class="wrap">
     <div class="eyebrow">Selected work</div>
     <h2>Featured projects</h2>
-    <p class="lead">Mobile, IoT, full-stack and web: four projects that show the range.</p>
+    <p class="lead">Mobile, IoT, full-stack and web. Open a case study for the full story.</p>
     <div class="featured" id="featured"></div>
   </div></section>
 
-  <section><div class="wrap">
+  <section id="more"><div class="wrap">
     <div class="eyebrow">Also built</div>
     <h2>More projects</h2>
     <p class="lead">AI agents, machine learning, VR and games.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
     <div class="grid" id="other"></div>
   </div></section>
 
@@ -540,7 +779,7 @@ const SITE = {
     <div class="eyebrow">Beyond code</div>
     <h2>Leadership & experience</h2>
     <p class="lead">Student organisations, events, volunteering and part-time work.</p>
-    <div class="timeline" id="timeline"></div>
+    <div id="timeline"></div>
   </div></section>
 
   <section id="awards"><div class="wrap">
@@ -566,6 +805,7 @@ const SITE = {
 
   <section id="contact" class="alt"><div class="wrap">
     <div class="cta reveal">
+      <span data-flower aria-hidden="true"></span>
       <div class="eyebrow">Get in touch</div>
       <h2>Let's work together</h2>
       <p>Open to internships and graduate software engineering roles. Email is the fastest way to reach me.</p>
@@ -576,55 +816,107 @@ const SITE = {
 
 <footer class="copyright" id="copyright"></footer>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel">
+    <button class="icon-btn modal-close" id="modal-close" aria-label="Close case study">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script>
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const $ = id => document.getElementById(id);
   const tags = list => `<div class="tags">${list.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>`;
 
-  // Small inline icons
+  // ---------- Flower motif (same shape as the tab icon) ----------
+  const FLOWER = `<svg class="flower" viewBox="0 0 64 64" aria-hidden="true"><g class="petals">${
+    [0, 72, 144, 216, 288].map(a => `<ellipse cx="32" cy="17" rx="9.5" ry="14" transform="rotate(${a} 32 32)"/>`).join("")
+  }</g><circle class="center" cx="32" cy="32" r="8.5"/></svg>`;
+  document.querySelectorAll("[data-flower]").forEach(el => {
+    if (el.classList.contains("hero-flower")) { el.innerHTML = FLOWER; el.firstChild.style.width = el.firstChild.style.height = "100%"; }
+    else el.outerHTML = FLOWER;
+  });
+
+  // ---------- Small icons ----------
   const I = {
     github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>',
     linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>',
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
     file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>',
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14Z"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
     award: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>',
   };
   const link = (url, label, cls, icon) => url ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener">${icon ? I[icon] : ""}${label}</a>` : "";
 
-  // Header
+  // ---------- Toast + copy email ----------
+  let toastTimer;
+  function toast(msg) {
+    const t = $("toast");
+    t.innerHTML = I.check + esc(msg);
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+  async function copyEmail() {
+    const email = SITE.links.email;
+    try { await navigator.clipboard.writeText(email); }
+    catch (e) {
+      const ta = document.createElement("textarea");
+      ta.value = email; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e2) {}
+      ta.remove();
+    }
+    toast("Email copied: " + email);
+  }
+
+  // ---------- Header ----------
   $("name").textContent = SITE.name;
   $("role").textContent = SITE.role;
   $("summary").textContent = SITE.summary;
+  if (SITE.status) $("status").innerHTML = `<span class="status"><span class="pulse"></span>${esc(SITE.status)}</span>`;
   $("chips").innerHTML = SITE.chips.map(c => `<span class="chip">${esc(c)}</span>`).join("");
   $("avatar").textContent = SITE.initials;
 
   const L = SITE.links;
+  const copyBtn = (cls, withText) => `<button class="${cls}" data-copy-email aria-label="Copy email address" title="Copy email address">${I.copy}${withText ? "Copy email" : ""}</button>`;
   $("links").innerHTML = [
     link(L.resume, "Resume", "btn primary", "file"),
     link(L.github, "GitHub", "btn", "github"),
     link(L.linkedin, "LinkedIn", "btn", "linkedin"),
     `<a class="btn" href="mailto:${esc(L.email)}">${I.mail}Email</a>`,
+    copyBtn("btn square", false),
   ].join("");
   $("footer-links").innerHTML = `<a class="btn primary" href="mailto:${esc(L.email)}">${I.mail}${esc(L.email)}</a>` +
-    link(L.linkedin, "LinkedIn", "btn", "linkedin") + link(L.github, "GitHub", "btn", "github");
-  $("copyright").textContent = `© ${new Date().getFullYear()} ${SITE.name}`;
+    copyBtn("btn", true) + link(L.linkedin, "LinkedIn", "btn", "linkedin") + link(L.github, "GitHub", "btn", "github");
+  document.querySelectorAll("[data-copy-email]").forEach(b => b.onclick = copyEmail);
+  $("copyright").innerHTML = FLOWER + `© ${new Date().getFullYear()} ${esc(SITE.name)}`;
 
-  // Featured projects
-  $("featured").innerHTML = SITE.featured.map((p, i) => `
-    <article class="card reveal">
-      <div class="shots" data-i="${i}"></div>
-      <div class="body">
-        <span class="meta">${esc(p.meta)}</span>
-        <h3>${esc(p.title)}<small>${esc(p.subtitle)}</small></h3>
-        <p>${esc(p.description)}</p>
-        ${p.role ? `<div class="roleline"><strong>My role:</strong> ${esc(p.role)}</div>` : ""}
-        <ul>${p.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
-        ${tags(p.tech)}
-        <div class="actions">${link(p.github, "View code", "btn", "github")}${link(p.demo, "Watch demo", "btn primary", "play")}</div>
-      </div>
-    </article>`).join("");
+  // ---------- Stats (count up when visible) ----------
+  const stats = SITE.stats || [];
+  if (!stats.length) $("stats").remove();
+  else $("stats").innerHTML = stats.map(s => `
+    <div class="stat"><div class="num" data-to="${s.value}" data-dec="${s.decimals || 0}" data-suf="${esc(s.suffix || "")}">${
+      Number(s.value).toFixed(s.decimals || 0)}${esc(s.suffix || "")}</div><div class="lbl">${esc(s.label)}</div></div>`).join("");
+  function countUp(el) {
+    const to = parseFloat(el.dataset.to), dec = +el.dataset.dec, suf = el.dataset.suf;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t0 = performance.now(), dur = 1300;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = (to * e).toFixed(dec) + suf;
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
 
   // ---------- Image discovery: images/<slug>-1, -2, ... in any common format ----------
   const EXTS = ["jpg", "png", "jpeg", "webp", "JPG", "PNG", "JPEG", "WEBP"];
@@ -633,13 +925,17 @@ const SITE = {
     for (const e of EXTS) { const u = await tryLoad(`${base}.${e}`); if (u) return u; }
     return null;
   }
-  async function findSeries(slug, max = 30) {
-    const out = [];
-    for (let n = 1; n <= max; n++) { const u = await findFile(`images/${slug}-${n}`); if (!u) break; out.push(u); }
-    return out;
+  const seriesCache = {};
+  function findSeries(slug, max = 30) {
+    if (!slug) return Promise.resolve([]);
+    if (!seriesCache[slug]) seriesCache[slug] = (async () => {
+      const out = [];
+      for (let n = 1; n <= max; n++) { const u = await findFile(`images/${slug}-${n}`); if (!u) break; out.push(u); }
+      return out;
+    })();
+    return seriesCache[slug];
   }
 
-  // Profile photo
   findFile(SITE.photo).then(url => {
     if (!url) return;
     const photo = new Image();
@@ -651,6 +947,8 @@ const SITE = {
   // ---------- Lightbox ----------
   const lb = document.createElement("div");
   lb.className = "lightbox";
+  lb.setAttribute("role", "dialog");
+  lb.setAttribute("aria-label", "Image viewer");
   lb.innerHTML = `<button class="close" aria-label="Close">×</button>
     <button class="nav-btn prev" aria-label="Previous">‹</button><img alt=""><button class="nav-btn next" aria-label="Next">›</button>
     <div class="cap"></div>`;
@@ -663,18 +961,15 @@ const SITE = {
     lb.querySelectorAll(".nav-btn").forEach(b => b.style.display = lbList.length > 1 ? "" : "none");
   };
   const lbStep = d => { lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); };
-  const openLightbox = (list, idx, title) => { lbList = list; lbIdx = idx; lbTitle = title; lbShow(); lb.classList.add("open"); document.body.style.overflow = "hidden"; };
-  const closeLightbox = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
+  const openLightbox = (list, idx, title) => {
+    lbList = list; lbIdx = idx; lbTitle = title; lbShow(); lb.classList.add("open"); document.body.classList.add("locked");
+    lb.querySelector(".close").focus();
+  };
+  const closeLightbox = () => { lb.classList.remove("open"); if (!$("modal").classList.contains("open")) document.body.classList.remove("locked"); };
   lb.querySelector(".close").onclick = closeLightbox;
   lb.querySelector(".prev").onclick = e => { e.stopPropagation(); lbStep(-1); };
   lb.querySelector(".next").onclick = e => { e.stopPropagation(); lbStep(1); };
   lb.onclick = e => { if (e.target === lb) closeLightbox(); };
-  document.addEventListener("keydown", e => {
-    if (!lb.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") lbStep(-1);
-    if (e.key === "ArrowRight") lbStep(1);
-  });
   let touchX = null;
   lb.addEventListener("touchstart", e => touchX = e.touches[0].clientX, { passive: true });
   lb.addEventListener("touchend", e => {
@@ -683,7 +978,81 @@ const SITE = {
     if (Math.abs(dx) > 50 && lbList.length > 1) lbStep(dx < 0 ? 1 : -1);
   });
 
-  // ---------- Featured: slideshow with blurred backdrop, or a title card ----------
+  // ---------- Case study modal ----------
+  const modal = $("modal");
+  let lastFocus = null;
+  async function openCase(p) {
+    const cs = p.caseStudy;
+    lastFocus = document.activeElement;
+    const section = (title, html) => html ? `<div><h4>${FLOWER}${esc(title)}</h4>${html}</div>` : "";
+    const list = items => items && items.length ? `<ul class="bullets">${items.map(b => `<li>${esc(b)}</li>`).join("")}</ul>` : "";
+    $("modal-content").innerHTML = `
+      <div class="modal-hero empty" id="modal-hero"></div>
+      <div class="modal-body">
+        <div class="modal-head">
+          <span class="meta">${esc(cs.context || p.meta)}</span>
+          <h3 id="modal-title">${esc(p.title)}${p.subtitle ? `<small>${esc(p.subtitle)}</small>` : ""}</h3>
+        </div>
+        ${cs.results && cs.results.length ? `<div class="results">${cs.results.map(r => `<div class="result"><div class="v">${esc(r.value)}</div><div class="l">${esc(r.label)}</div></div>`).join("")}</div>` : ""}
+        ${section("The problem", cs.problem ? `<p>${esc(cs.problem)}</p>` : "")}
+        ${section(cs.myPart ? "What the team built" : "What I built", list(cs.built))}
+        ${section("My part", list(cs.myPart))}
+        ${section("Tech stack", tags(p.tech))}
+        <div id="modal-gallery-wrap"></div>
+        <div class="actions" style="padding-top:0">${link(p.github, "View code", "btn", "github")}${link(p.demo, "Watch demo", "btn primary", "play")}</div>
+      </div>`;
+    modal.classList.add("open");
+    modal.scrollTop = 0;
+    document.body.classList.add("locked");
+    $("modal-close").focus();
+
+    const imgs = await findSeries(p.slug);
+    if (!modal.classList.contains("open") || !imgs.length) return;
+    const hero = $("modal-hero");
+    hero.classList.remove("empty");
+    hero.innerHTML = `<div class="backdrop" style="background-image:url('${esc(imgs[0])}')"></div><img src="${esc(imgs[0])}" alt="${esc(p.title)} screenshot">`;
+    hero.querySelector("img").onclick = () => openLightbox(imgs, 0, p.title);
+    if (imgs.length > 1) {
+      $("modal-gallery-wrap").innerHTML = `<h4>${FLOWER}Screenshots</h4><div class="modal-gallery">${imgs.map((src, k) =>
+        `<button data-k="${k}" aria-label="View screenshot ${k + 1}"><img src="${esc(src)}" alt=""></button>`).join("")}</div>`;
+      $("modal-gallery-wrap").querySelectorAll("button").forEach(b => b.onclick = () => openLightbox(imgs, +b.dataset.k, p.title));
+    }
+  }
+  function closeCase() {
+    modal.classList.remove("open");
+    document.body.classList.remove("locked");
+    if (lastFocus) lastFocus.focus();
+  }
+  $("modal-close").onclick = closeCase;
+  modal.addEventListener("click", e => { if (e.target === modal) closeCase(); });
+
+  document.addEventListener("keydown", e => {
+    if (lb.classList.contains("open")) {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") lbStep(-1);
+      if (e.key === "ArrowRight") lbStep(1);
+      return;
+    }
+    if (modal.classList.contains("open") && e.key === "Escape") closeCase();
+    if (nav.classList.contains("open") && e.key === "Escape") closeMenu();
+  });
+
+  // ---------- Featured projects ----------
+  $("featured").innerHTML = SITE.featured.map((p, i) => `
+    <article class="card reveal">
+      <div class="shots" data-i="${i}"></div>
+      <div class="body">
+        <span class="meta">${esc(p.meta)}</span>
+        <h3>${esc(p.title)}<small>${esc(p.subtitle)}</small></h3>
+        <p>${esc(p.description)}</p>
+        ${p.role ? `<div class="roleline"><strong>My role:</strong> ${esc(p.role)}</div>` : ""}
+        <ul class="bullets">${p.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+        ${tags(p.tech)}
+        <div class="actions">${p.caseStudy ? `<button class="btn primary" data-case="f${i}">${I.book}Read case study</button>` : ""}${
+          link(p.github, "View code", "btn", "github")}${link(p.demo, "Watch demo", "btn", "play")}</div>
+      </div>
+    </article>`).join("");
+
   document.querySelectorAll(".shots").forEach(async box => {
     const p = SITE.featured[box.dataset.i];
     const list = await findSeries(p.slug);
@@ -722,15 +1091,38 @@ const SITE = {
     }
   });
 
-  // Other projects
+  // ---------- More projects + filter tabs ----------
   $("other").innerHTML = SITE.other.map((p, i) => `
     <article class="mini reveal" data-i="${i}">
       <span class="meta">${esc(p.meta)}</span>
       <h3>${esc(p.title)}</h3>
       <p>${esc(p.description)}</p>
       ${tags(p.tech)}
-      <div class="actions">${link(p.github, "Code", "pill", "github")}${link(p.demo, "Watch demo", "pill gold", "play")}</div>
+      <div class="actions">${p.caseStudy ? `<button class="pill gold" data-case="o${i}">${I.book}Case study</button>` : ""}${
+        link(p.github, "Code", "pill", "github")}${link(p.demo, "Watch demo", "pill gold", "play")}</div>
     </article>`).join("");
+
+  document.querySelectorAll("[data-case]").forEach(b => b.onclick = () => {
+    const k = b.dataset.case;
+    openCase(k[0] === "f" ? SITE.featured[+k.slice(1)] : SITE.other[+k.slice(1)]);
+  });
+
+  const cats = [];
+  SITE.other.forEach(p => (p.categories || []).forEach(c => { if (!cats.includes(c)) cats.push(c); }));
+  if (cats.length > 1) {
+    const countOf = c => c === "All" ? SITE.other.length : SITE.other.filter(p => (p.categories || []).includes(c)).length;
+    $("filters").innerHTML = ["All", ...cats].map((c, k) =>
+      `<button data-cat="${esc(c)}" aria-pressed="${k === 0}"${k === 0 ? ' class="on"' : ""}>${esc(c)}<span class="n">${countOf(c)}</span></button>`).join("");
+    $("filters").querySelectorAll("button").forEach(b => b.onclick = () => {
+      const c = b.dataset.cat;
+      $("filters").querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
+      document.querySelectorAll("#other .mini").forEach(card => {
+        const p = SITE.other[card.dataset.i];
+        card.classList.toggle("hide", c !== "All" && !(p.categories || []).includes(c));
+        card.classList.add("in");
+      });
+    });
+  } else $("filters").remove();
 
   document.querySelectorAll(".mini").forEach(async card => {
     const p = SITE.other[card.dataset.i];
@@ -745,7 +1137,7 @@ const SITE = {
     card.prepend(btn);
   });
 
-  // Design gallery: only items whose image exists (any format), in config order.
+  // ---------- Design gallery ----------
   Promise.all(SITE.design.map(d => findFile(d.image))).then(urls => {
     const found = SITE.design.map((d, k) => ({ ...d, url: urls[k] })).filter(d => d.url);
     if (!found.length) return;
@@ -759,22 +1151,8 @@ const SITE = {
     $("design-section").hidden = false;
   });
 
-  // Experience, grouped under headings in the order they first appear
-  const groups = [...new Set(SITE.experience.map(e => e.group || ""))];
-  $("timeline").outerHTML = groups.map(g => `
-    ${g ? `<h3 class="exp-group">${esc(g)}</h3>` : ""}
-    <div class="timeline">${SITE.experience.map((e, i) => (e.group || "") !== g ? "" : `
-      <article class="exp reveal" data-i="${i}">
-        <h3>${esc(e.title)}</h3>
-        <span class="when">${esc(e.when)}</span>
-        <span class="org">${esc(e.org)}</span>
-        <p>${esc(e.text)}</p>
-      </article>`).join("")}</div>`).join("");
-
-  // Photo thumbnails (certificates, event photos) for experience and awards.
-  // Shows up to 4; the 4th says "+N" when there are more. Click opens the full-screen viewer.
+  // ---------- Photo thumbnails (experience + awards) ----------
   async function addThumbs(target, slug, title) {
-    if (!slug) return;
     const list = await findSeries(slug);
     if (!list.length) return;
     const MAX = 4;
@@ -790,16 +1168,28 @@ const SITE = {
     });
     target.appendChild(row);
   }
+
+  // ---------- Experience (grouped) ----------
+  const groups = [...new Set(SITE.experience.map(e => e.group || ""))];
+  $("timeline").innerHTML = groups.map(g => `
+    ${g ? `<h3 class="exp-group">${esc(g)}</h3>` : ""}
+    <div class="timeline">${SITE.experience.map((e, i) => (e.group || "") !== g ? "" : `
+      <article class="exp reveal" data-i="${i}">
+        <h3>${esc(e.title)}</h3>
+        <span class="when">${esc(e.when)}</span>
+        <span class="org">${esc(e.org)}</span>
+        <p>${esc(e.text)}</p>
+      </article>`).join("")}</div>`).join("");
   document.querySelectorAll("#experience .exp").forEach(el => { const e = SITE.experience[el.dataset.i]; addThumbs(el, e.slug, e.title); });
 
-  // Awards
+  // ---------- Awards ----------
   $("award-list").innerHTML = SITE.awards.map(a => `
     <div class="award reveal"><div class="icon">${I.award}</div>
       <div class="award-text"><h3>${esc(a.title)}</h3><div class="by">${esc(a.by)}</div><p>${esc(a.text)}</p></div></div>`).join("");
   document.querySelectorAll("#award-list .award").forEach((el, i) =>
     addThumbs(el.querySelector(".award-text"), SITE.awards[i].slug, SITE.awards[i].title));
 
-  // Skills: one icon per group title. Add a group here to give it an icon.
+  // ---------- Skills (icon per group title) ----------
   const GROUP_ICONS = {
     "Languages": '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
     "Web & Mobile": '<rect x="2" y="4" width="14" height="11" rx="2"/><path d="M6 19h6M9 15v4"/><rect x="15" y="9" width="7" height="12" rx="1.5"/>',
@@ -810,11 +1200,11 @@ const SITE = {
   };
   const groupIcon = g => GROUP_ICONS[g]
     ? `<span class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GROUP_ICONS[g]}</svg></span>`
-    : "";
+    : `<span class="g-icon">${FLOWER}</span>`;
   $("skill-list").innerHTML = Object.entries(SITE.skills).map(([group, list]) =>
     `<div class="skill-group reveal"><h3>${groupIcon(group)}${esc(group)}</h3>${tags(list)}</div>`).join("");
 
-  // Spoken languages: a ring that fills to the level (out of 5), with the language code inside
+  // ---------- Spoken languages ----------
   const C = 2 * Math.PI * 30;
   $("lang-list").innerHTML = (SITE.languages || []).map((l, i) => `
     <article class="lang reveal">
@@ -834,8 +1224,32 @@ const SITE = {
       </div>
     </article>`).join("");
 
-  // ---------- Nav: border on scroll + highlight current section ----------
+  // ---------- Theme toggle ----------
+  const root = document.documentElement;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const syncThemeColor = () => document.querySelector('meta[name="theme-color"]').setAttribute("content", isDark() ? "#14111a" : "#f7f5fa");
+  syncThemeColor();
+  $("theme-toggle").onclick = () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    syncThemeColor();
+  };
+
+  // ---------- Mobile menu ----------
   const nav = $("nav");
+  const closeMenu = () => { nav.classList.remove("open"); $("menu-toggle").setAttribute("aria-expanded", "false"); $("menu-toggle").setAttribute("aria-label", "Open menu"); };
+  $("menu-toggle").onclick = e => {
+    e.stopPropagation();
+    const open = !nav.classList.contains("open");
+    nav.classList.toggle("open", open);
+    $("menu-toggle").setAttribute("aria-expanded", String(open));
+    $("menu-toggle").setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+  $("menu").querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+  document.addEventListener("click", e => { if (nav.classList.contains("open") && !nav.contains(e.target)) closeMenu(); });
+
+  // ---------- Nav border, section highlight, reveal ----------
   const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
   const menuLinks = [...document.querySelectorAll("nav .menu a")];
@@ -848,9 +1262,13 @@ const SITE = {
     }, { rootMargin: "-45% 0px -50% 0px" });
     menuLinks.forEach(a => { const s = document.querySelector(a.getAttribute("href")); if (s) spy.observe(s); });
 
-    // Fade cards in as they scroll into view
     const rv = new IntersectionObserver(entries => {
-      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); rv.unobserve(en.target); } });
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        if (en.target.id === "stats") en.target.querySelectorAll(".num").forEach(countUp);
+        rv.unobserve(en.target);
+      });
     }, { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".reveal").forEach(el => rv.observe(el));
   } else {
