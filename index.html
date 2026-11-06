@@ -65,8 +65,19 @@
   .featured { display: grid; gap: 28px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
           display: grid; grid-template-columns: 1fr 1.15fr; }
-  .shots { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; background: var(--border); min-height: 240px; }
-  .shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shots { position: relative; min-height: 300px; background: #18181b; overflow: hidden; }
+  .shots .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; cursor: zoom-in;
+                  opacity: 0; transition: opacity .35s; pointer-events: none; }
+  .shots .slide.on { opacity: 1; pointer-events: auto; z-index: 1; }
+  .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%;
+             border: 0; background: rgba(0,0,0,.55); color: #fff; font-size: 1.3rem; line-height: 1; cursor: pointer; z-index: 2; }
+  .nav-btn:hover { background: rgba(0,0,0,.8); }
+  .nav-btn.prev { left: 10px; } .nav-btn.next { right: 10px; }
+  .dots { position: absolute; bottom: 12px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; z-index: 2; }
+  .dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; background: rgba(255,255,255,.45); cursor: pointer; padding: 0; }
+  .dots button.on { background: #fff; width: 20px; border-radius: 4px; }
+  .count { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.55); color: #fff; font-size: .75rem;
+           padding: 2px 9px; border-radius: 999px; z-index: 2; }
   .shots.empty { display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), var(--accent-2));
                  color: #fff; padding: 24px; text-align: center; }
   .shots.empty span { font-size: 1.8rem; font-weight: 700; letter-spacing: -.01em; }
@@ -86,6 +97,21 @@
           display: flex; flex-direction: column; gap: 10px; }
   .mini p { color: var(--muted); font-size: .93rem; }
   .mini .actions { font-size: .92rem; gap: 16px; }
+  .mthumb { position: relative; margin: -22px -22px 4px; aspect-ratio: 16/9; background: #18181b; cursor: zoom-in;
+            border-radius: 14px 14px 0 0; overflow: hidden; border: 0; padding: 0; display: block; }
+  .mthumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+  .mthumb:hover img { transform: scale(1.03); }
+  .mthumb .count { top: auto; bottom: 10px; }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.92); display: none;
+              align-items: center; justify-content: center; flex-direction: column; padding: 56px 16px 24px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: calc(100vh - 120px); object-fit: contain; border-radius: 6px; }
+  .lightbox .cap { color: #e7e5e4; font-size: .9rem; margin-top: 12px; text-align: center; }
+  .lightbox .close { position: absolute; top: 12px; right: 16px; background: none; border: 0; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+  .lightbox .nav-btn { background: rgba(255,255,255,.15); }
+  .lightbox .nav-btn:hover { background: rgba(255,255,255,.3); }
 
   /* Design */
   .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
@@ -135,8 +161,13 @@
 <script>
 /* =====================================================================
    EDIT YOUR CONTENT HERE.
-   Images: put files in the images/ folder with the names used below.
-   Until an image exists, projects show a coloured title card and the
+   IMAGES: put them in the images/ folder, named  <slug>-1, <slug>-2, ...
+   Any number per project, .jpg / .jpeg / .png / .webp all work, e.g.
+     images/nomly-1.png  images/nomly-2.jpg  images/nomly-3.png
+   Numbers must go 1, 2, 3 with no gaps (it stops at the first missing one).
+   Each project's slug is written next to its title below.
+   Profile photo: images/profile.jpg (or .png).
+   No images yet? Featured projects show a coloured title card, and the
    Design section stays hidden, so the site never shows broken images.
    ===================================================================== */
 const SITE = {
@@ -144,7 +175,7 @@ const SITE = {
   role: "Software Engineering Student · Xiamen University Malaysia",
   summary: "Final-year software engineering student who builds across the stack: Flutter and IoT, ASP.NET Core and React, LLM agents, and Unity games. I also lead student teams, from sponsorship deals to 150-person industry events.",
   chips: ["B.Eng (Hons) Software Engineering, 2023 – 2027", "Dean's List × 3", "100% tuition merit scholarship", "Based in Sepang, Selangor"],
-  photo: "images/profile.jpg",
+  photo: "images/profile",
   initials: "KS",
   links: {
     resume: "resume.pdf",
@@ -166,7 +197,7 @@ const SITE = {
       ],
       tech: ["Flutter", "Dart", "Firebase", "ESP32", "Arduino C++", "Python", "scikit-learn", "TensorFlow Lite", "OpenAI API"],
       role: "",
-      images: ["images/havapaw-1.png", "images/havapaw-2.png"],
+      slug: "havapaw",
       github: "https://github.com/knshielim/SWE2309441_FlutterApp", demo: "",
     },
     {
@@ -181,7 +212,7 @@ const SITE = {
       ],
       tech: ["ASP.NET Core", "C#", "EF Core", "React", "Semantic Kernel", "LLM", "JWT"],
       role: "AI Assistant & pantry scanning developer",
-      images: ["images/nomly-1.png", "images/nomly-2.png"],
+      slug: "nomly",
       github: "https://github.com/knshielim/Nomly_PE", demo: "",
     },
     {
@@ -196,7 +227,7 @@ const SITE = {
       ],
       tech: ["ASP.NET Core", "C#", "React", "SQL", "REST API"],
       role: "",
-      images: ["images/tasktracker-1.png", "images/tasktracker-2.png"],
+      slug: "tasktracker",
       github: "https://github.com/knshielim/SWE2309441_SWE310_Assignment1", demo: "",
     },
     {
@@ -211,44 +242,44 @@ const SITE = {
       ],
       tech: ["Java", "JSP", "Servlets", "MySQL", "Tomcat"],
       role: "Website structure & destination content",
-      images: ["images/halabo-1.png", "images/halabo-2.png"],
+      slug: "halabo",
       github: "https://github.com/knshielim/FinalProject_ProgrammingElective", demo: "",
     },
   ],
 
   other: [
     {
-      title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
+      slug: "peatland", title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
       description: "AI early-warning system for Indonesian peatland fires. I built the decision agent that turns risk predictions into bilingual emergency alerts, with dispatch rules, incident clustering, cooldowns, and Gemini rephrasing behind guardrails. Written in standard-library Python to run on IBM LinuxONE.",
       tech: ["Python", "Gemini", "IBM LinuxONE"], github: "https://github.com/ProProcer/peatland-alert-system", demo: "",
     },
     {
-      title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
+      slug: "stonehold", title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
       description: "Google Cardboard castle exploration controlled only by gaze. A reusable gaze-interaction system, teleport pads, and 12+ interactions including a working drawbridge, scored archery and a day/night clock.",
       tech: ["Unity (URP)", "C#", "Google Cardboard"], github: "", demo: "https://drive.google.com/file/d/1O4Op5XPI2YuJ65S1-U3lFRodsUnCF1vd/view?usp=sharing",
     },
     {
-      title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
+      slug: "monster-merger", title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
       description: "Pixel-art tower defense with gacha summoning and unit merging. I built merging and Mythic combinations, the level manager, the boss trigger and the story dialogue system, and designed the UI sprites and screens.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/GAMEDEV", demo: "",
     },
     {
-      title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
+      slug: "grabot", title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
       description: "Chat-based AI assistant for GrabFood merchants. I built the mock merchant data, daily report metrics, stock projections, low-stock alerts and the inventory update feature.",
       tech: ["Python", "Flask", "Gemini"], github: "https://github.com/ProProcer/mex-assistant-hackathon2", demo: "",
     },
     {
-      title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
+      slug: "currency-detector", title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
       description: "Recognises Southeast Asian banknotes from a photo. I designed and trained a multi-output network that predicts country, denomination and year range from one image.",
       tech: ["Python", "TensorFlow", "Keras"], github: "https://github.com/knshielim/CurrencyDetector", demo: "",
     },
     {
-      title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
+      slug: "pacman", title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
       description: "Pac-Man in Godot. I programmed all four ghosts with distinct strategies (A* pursuit, predictive targeting, combined targeting, proximity switching) plus scatter, chase and frightened modes.",
       tech: ["Godot", "GDScript", "A* search"], github: "https://github.com/GlazeProgramming/Pac-Man-AI-Search", demo: "",
     },
     {
-      title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
+      slug: "obstacles", title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
       description: "First-person obstacle course with Rigidbody physics, running, jumping and pushable objects across three sections.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/Obstacles_Unity", demo: "",
     },
@@ -256,10 +287,10 @@ const SITE = {
 
   // Shown only once at least one of these image files exists.
   design: [
-    { image: "images/design-sprites.png", caption: "UI sprites for Monster Merger TD" },
-    { image: "images/design-figma.png",   caption: "Figma mockups" },
-    { image: "images/design-poster-1.png", caption: "Event poster, XMUM AI Club" },
-    { image: "images/design-poster-2.png", caption: "Event poster, International Student Ambassador" },
+    { image: "images/design-sprites", caption: "UI sprites for Monster Merger TD" },
+    { image: "images/design-figma",   caption: "Figma mockups" },
+    { image: "images/design-poster-1", caption: "Event poster, XMUM AI Club" },
+    { image: "images/design-poster-2", caption: "Event poster, International Student Ambassador" },
   ],
 
   experience: [
@@ -384,10 +415,7 @@ const SITE = {
   $("summary").textContent = SITE.summary;
   $("chips").innerHTML = SITE.chips.map(c => `<span class="chip">${esc(c)}</span>`).join("");
   $("avatar").textContent = SITE.initials;
-  const photo = new Image();
-  photo.alt = "Photo of " + SITE.name;
-  photo.onload = () => $("avatar").appendChild(photo);
-  photo.src = SITE.photo;
+  // Photo is found further down once the image helpers exist.
 
   const L = SITE.links;
   const contactLinks = [
@@ -415,29 +443,102 @@ const SITE = {
       </div>
     </article>`).join("");
 
-  // Load screenshots; fall back to a title card if none exist.
-  document.querySelectorAll(".shots").forEach(box => {
+  // ---------- Image discovery: images/<slug>-1, -2, ... in any common format ----------
+  const EXTS = ["jpg", "png", "jpeg", "webp", "JPG", "PNG", "JPEG", "WEBP"];
+  const tryLoad = url => new Promise(res => { const i = new Image(); i.onload = () => res(url); i.onerror = () => res(null); i.src = url; });
+  async function findFile(base) {
+    for (const e of EXTS) { const u = await tryLoad(`${base}.${e}`); if (u) return u; }
+    return null;
+  }
+  async function findSeries(slug, max = 30) {
+    const out = [];
+    for (let n = 1; n <= max; n++) { const u = await findFile(`images/${slug}-${n}`); if (!u) break; out.push(u); }
+    return out;
+  }
+
+  // Profile photo (images/profile.jpg or .png etc.)
+  findFile(SITE.photo).then(url => {
+    if (!url) return;
+    const photo = new Image();
+    photo.alt = "Photo of " + SITE.name;
+    photo.src = url;
+    $("avatar").appendChild(photo);
+  });
+
+  // ---------- Lightbox ----------
+  const lb = document.createElement("div");
+  lb.className = "lightbox";
+  lb.innerHTML = `<button class="close" aria-label="Close">×</button>
+    <button class="nav-btn prev" aria-label="Previous">‹</button><img alt=""><button class="nav-btn next" aria-label="Next">›</button>
+    <div class="cap"></div>`;
+  document.body.appendChild(lb);
+  let lbList = [], lbIdx = 0, lbTitle = "";
+  const lbShow = () => {
+    lb.querySelector("img").src = lbList[lbIdx];
+    lb.querySelector("img").alt = `${lbTitle} image ${lbIdx + 1}`;
+    lb.querySelector(".cap").textContent = lbList.length > 1 ? `${lbTitle} · ${lbIdx + 1} / ${lbList.length}` : lbTitle;
+    lb.querySelectorAll(".nav-btn").forEach(b => b.style.display = lbList.length > 1 ? "" : "none");
+  };
+  const lbStep = d => { lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); };
+  const openLightbox = (list, idx, title) => { lbList = list; lbIdx = idx; lbTitle = title; lbShow(); lb.classList.add("open"); document.body.style.overflow = "hidden"; };
+  const closeLightbox = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
+  lb.querySelector(".close").onclick = closeLightbox;
+  lb.querySelector(".prev").onclick = e => { e.stopPropagation(); lbStep(-1); };
+  lb.querySelector(".next").onclick = e => { e.stopPropagation(); lbStep(1); };
+  lb.onclick = e => { if (e.target === lb) closeLightbox(); };
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") lbStep(-1);
+    if (e.key === "ArrowRight") lbStep(1);
+  });
+  let touchX = null;
+  lb.addEventListener("touchstart", e => touchX = e.touches[0].clientX, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+    if (Math.abs(dx) > 50 && lbList.length > 1) lbStep(dx < 0 ? 1 : -1);
+  });
+
+  // ---------- Featured: slideshow, or a title card if no images ----------
+  document.querySelectorAll(".shots").forEach(async box => {
     const p = SITE.featured[box.dataset.i];
-    let pending = p.images.length, loaded = 0;
-    const done = () => {
-      if (--pending === 0 && loaded === 0) {
-        box.classList.add("empty");
-        box.innerHTML = `<div><span>${esc(p.title)}</span><small>${esc(p.subtitle)}</small></div>`;
-      }
+    const list = await findSeries(p.slug);
+    if (!list.length) {
+      box.classList.add("empty");
+      box.innerHTML = `<div><span>${esc(p.title)}</span><small>${esc(p.subtitle)}</small></div>`;
+      return;
+    }
+    box.innerHTML = list.map((src, n) => `<img class="slide${n ? "" : " on"}" src="${esc(src)}" alt="${esc(p.title)} screenshot ${n + 1}">`).join("") +
+      (list.length > 1 ? `<button class="nav-btn prev" aria-label="Previous image">‹</button><button class="nav-btn next" aria-label="Next image">›</button>
+        <span class="count">1 / ${list.length}</span>
+        <div class="dots">${list.map((_, n) => `<button aria-label="Image ${n + 1}"${n ? "" : ' class="on"'}></button>`).join("")}</div>` : "");
+    let cur = 0;
+    const slides = box.querySelectorAll(".slide"), dots = box.querySelectorAll(".dots button");
+    const go = n => {
+      cur = (n + list.length) % list.length;
+      slides.forEach((s, k) => s.classList.toggle("on", k === cur));
+      dots.forEach((d, k) => d.classList.toggle("on", k === cur));
+      const c = box.querySelector(".count"); if (c) c.textContent = `${cur + 1} / ${list.length}`;
     };
-    if (!pending) { pending = 1; done(); return; }
-    p.images.forEach(src => {
-      const img = new Image();
-      img.alt = p.title + " screenshot";
-      img.onload = () => { loaded++; box.appendChild(img); done(); };
-      img.onerror = done;
-      img.src = src;
-    });
+    slides.forEach((s, k) => s.onclick = () => openLightbox(list, k, p.title));
+    dots.forEach((d, k) => d.onclick = () => go(k));
+    if (list.length > 1) {
+      box.querySelector(".prev").onclick = () => go(cur - 1);
+      box.querySelector(".next").onclick = () => go(cur + 1);
+      let sx = null;
+      box.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
+      box.addEventListener("touchend", e => {
+        if (sx === null) return;
+        const dx = e.changedTouches[0].clientX - sx; sx = null;
+        if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      });
+    }
   });
 
   // Other projects
-  $("other").innerHTML = SITE.other.map(p => `
-    <article class="mini">
+  $("other").innerHTML = SITE.other.map((p, i) => `
+    <article class="mini" data-i="${i}">
       <span class="meta">${esc(p.meta)}</span>
       <h3>${esc(p.title)}</h3>
       <p>${esc(p.description)}</p>
@@ -445,20 +546,32 @@ const SITE = {
       <div class="actions">${ext(p.github, "GitHub →", "")}${ext(p.demo, "Watch demo →", "")}</div>
     </article>`).join("");
 
-  // Design gallery: only show items whose image exists.
-  SITE.design.forEach(d => {
-    const img = new Image();
-    img.alt = d.caption;
-    img.onload = () => {
+  // Other projects: cover image on top of the card (click to view all).
+  document.querySelectorAll(".mini").forEach(async card => {
+    const p = SITE.other[card.dataset.i];
+    const list = await findSeries(p.slug);
+    if (!list.length) return;
+    const btn = document.createElement("button");
+    btn.className = "mthumb";
+    btn.setAttribute("aria-label", `View ${p.title} images`);
+    btn.innerHTML = `<img src="${esc(list[0])}" alt="${esc(p.title)} screenshot">` +
+      (list.length > 1 ? `<span class="count">${list.length} images</span>` : "");
+    btn.onclick = () => openLightbox(list, 0, p.title);
+    card.prepend(btn);
+  });
+
+  // Design gallery: only show items whose image exists (any format). Keeps config order.
+  Promise.all(SITE.design.map(d => findFile(d.image))).then(urls => {
+    const found = SITE.design.map((d, k) => ({ ...d, url: urls[k] })).filter(d => d.url);
+    if (!found.length) return;
+    const all = found.map(d => d.url);
+    found.forEach((d, k) => {
       const fig = document.createElement("figure");
-      fig.appendChild(img);
-      const cap = document.createElement("figcaption");
-      cap.textContent = d.caption;
-      fig.appendChild(cap);
+      fig.innerHTML = `<img src="${esc(d.url)}" alt="${esc(d.caption)}" style="cursor:zoom-in"><figcaption>${esc(d.caption)}</figcaption>`;
+      fig.querySelector("img").onclick = () => openLightbox(all, k, d.caption);
       $("design").appendChild(fig);
-      $("design-section").hidden = false;
-    };
-    img.src = d.image;
+    });
+    $("design-section").hidden = false;
   });
 
   // Experience
