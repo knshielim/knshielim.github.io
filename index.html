@@ -191,6 +191,16 @@
   .award .by { color: var(--accent); font-size: .85rem; font-weight: 500; }
   .award p { color: var(--muted); font-size: .9rem; margin-top: 4px; }
 
+  /* Photo thumbnails on experience & award cards */
+  .thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; grid-column: 1 / -1; }
+  .thumbs button { position: relative; width: 92px; height: 68px; border-radius: 10px; overflow: hidden; padding: 0; cursor: zoom-in;
+                   border: 1px solid var(--border); background: var(--media); transition: border-color .2s, transform .2s; }
+  .thumbs button:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumbs .more { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(20,17,26,.66);
+                  color: #fff; font-weight: 700; font-size: .95rem; }
+  .award .thumbs button { width: 80px; height: 60px; }
+
   /* Skills */
   .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
   .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; box-shadow: var(--shadow); }
@@ -260,6 +270,8 @@
      images/nomly-1.png  images/nomly-2.jpg  images/nomly-3.png
    Numbers must go 1, 2, 3 with no gaps (it stops at the first missing one).
    Each project's slug is written next to its title below.
+   Leadership & experience and Awards entries work the same way, e.g.
+     images/huawei-day-1.jpg  images/deans-list-1.png  images/deans-list-2.png
    Profile photo: images/profile.jpg (or .png).
    No images yet? Featured projects show a coloured title card, and the
    Design section stays hidden, so the site never shows broken images.
@@ -388,31 +400,31 @@ const SITE = {
   ],
 
   experience: [
-    { title: "Head of Sponsorship", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Oct 2024 – Oct 2025",
+    { slug: "sponsorship", title: "Head of Sponsorship", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Oct 2024 – Oct 2025",
       text: "Led sponsor outreach and negotiations, and brought industry partners such as Huawei on campus for talks and company visits." },
-    { title: "Person-in-Charge & Emcee, Huawei Day: Intelligent World 2030", org: "XMUM AI Club", when: "Feb – Apr 2025",
+    { slug: "huawei-day", title: "Person-in-Charge & Emcee, Huawei Day: Intelligent World 2030", org: "XMUM AI Club", when: "Feb – Apr 2025",
       text: "Main contact with Huawei's manager. Directed five committee divisions from planning to execution, for an event with 150+ attendees." },
-    { title: "Vice Organizing Chairperson, International Student Briefing", org: "XMUM International Student Ambassador (ISA)", when: "May – Oct 2026",
+    { slug: "isa-briefing", title: "Vice Organizing Chairperson, International Student Briefing", org: "XMUM International Student Ambassador (ISA)", when: "May – Oct 2026",
       text: "Planned the schedule, catering, registration and crowd-control positions, reviewed the presentation slides, and coordinated helpers on the day." },
-    { title: "Treasurer", org: "XMUM International Student Ambassador (ISA)", when: "Jun 2024 – Nov 2026",
+    { slug: "isa-treasurer", title: "Treasurer", org: "XMUM International Student Ambassador (ISA)", when: "Jun 2024 – Nov 2026",
       text: "Tracked the organisation's funds, prepared event financial reports, and planned budgets with event leads." },
-    { title: "Vice Organizing Chairperson, dPickleball", org: "XMUM AI Club", when: "Apr 2025 – present",
+    { slug: "dpickleball", title: "Vice Organizing Chairperson, dPickleball", org: "XMUM AI Club", when: "Apr 2025 – present",
       text: "Connected the design, outreach and sponsorship teams, managed the secretaries, and reviewed every poster and post before publishing." },
-    { title: "Secretary, Global Carnival 2026", org: "XMUM International Student Ambassador (ISA)", when: "Dec 2025 – May 2026",
+    { slug: "global-carnival", title: "Secretary, Global Carnival 2026", org: "XMUM International Student Ambassador (ISA)", when: "Dec 2025 – May 2026",
       text: "Ran documentation, registration records, forms and announcements across committees for one of XMUM's largest multicultural events." },
-    { title: "Project Leader, CS Go Community Service", org: "Xiamen University Malaysia", when: "Apr – Jul 2024",
+    { slug: "cs-go", title: "Project Leader, CS Go Community Service", org: "Xiamen University Malaysia", when: "Apr – Jul 2024",
       text: "Led six committees to design and install campus signage and navigation maps, after getting approval from the maintenance department." },
-    { title: "Student Helper (part-time)", org: "Xiamen University Malaysia", when: "Dec 2024 – Oct 2026",
+    { slug: "student-helper", title: "Student Helper (part-time)", org: "Xiamen University Malaysia", when: "Dec 2024 – Oct 2026",
       text: "Briefing-session helper across six intakes (VOC and crowd control in 2026/09), arrival helper for new international students, registration-day check-in, and convocation usher." },
   ],
   alsoExperience: "Also: Treasurer for the Explore Malaysia: Malacca trip (44 participants), Global Carnival sponsorship team, and Game Master for Crescendo Orientation and PPI MAKRAB.",
 
   awards: [
-    { title: "Dean's List, three semesters", by: "Xiamen University Malaysia", text: "GPA 3.94 (2025/04), 3.88 (2025/09), 3.93 (2026/04)." },
-    { title: "Merit Scholarship & Student Grant", by: "Xiamen University Malaysia", text: "100% tuition coverage for all four years, kept by staying in the top 35% of the intake." },
-    { title: "IBM Z Datathon 2026", by: "Team project", text: "Agent Engineer for the Peatland Alert System." },
-    { title: "UMHackathon 2025", by: "Universiti Malaya", text: "Participant, built Grabot with a 5-person team." },
-    { title: "Huawei Talent Online certificates", by: "Huawei", text: "AI Basics (2025), 5G Basics (2024), Computer Networks (2024)." },
+    { slug: "deans-list", title: "Dean's List, three semesters", by: "Xiamen University Malaysia", text: "GPA 3.94 (2025/04), 3.88 (2025/09), 3.93 (2026/04)." },
+    { slug: "scholarship", title: "Merit Scholarship & Student Grant", by: "Xiamen University Malaysia", text: "100% tuition coverage for all four years, kept by staying in the top 35% of the intake." },
+    { slug: "ibm-datathon", title: "IBM Z Datathon 2026", by: "Team project", text: "Agent Engineer for the Peatland Alert System." },
+    { slug: "umhackathon", title: "UMHackathon 2025", by: "Universiti Malaya", text: "Participant, built Grabot with a 5-person team." },
+    { slug: "huawei-certs", title: "Huawei Talent Online certificates", by: "Huawei", text: "AI Basics (2025), 5G Basics (2024), Computer Networks (2024)." },
   ],
 
   skills: {
@@ -705,10 +717,33 @@ const SITE = {
     </article>`).join("");
   $("also").textContent = SITE.alsoExperience || "";
 
+  // Photo thumbnails (certificates, event photos) for experience and awards.
+  // Shows up to 4; the 4th says "+N" when there are more. Click opens the full-screen viewer.
+  async function addThumbs(target, slug, title) {
+    if (!slug) return;
+    const list = await findSeries(slug);
+    if (!list.length) return;
+    const MAX = 4;
+    const row = document.createElement("div");
+    row.className = "thumbs";
+    list.slice(0, MAX).forEach((src, k) => {
+      const b = document.createElement("button");
+      b.setAttribute("aria-label", `View ${title} photo ${k + 1}`);
+      b.innerHTML = `<img src="${esc(src)}" alt="${esc(title)} photo ${k + 1}">` +
+        (k === MAX - 1 && list.length > MAX ? `<span class="more">+${list.length - MAX + 1}</span>` : "");
+      b.onclick = () => openLightbox(list, k, title);
+      row.appendChild(b);
+    });
+    target.appendChild(row);
+  }
+  document.querySelectorAll("#timeline .exp").forEach((el, i) => addThumbs(el, SITE.experience[i].slug, SITE.experience[i].title));
+
   // Awards
   $("award-list").innerHTML = SITE.awards.map(a => `
     <div class="award reveal"><div class="icon">${I.award}</div>
-      <div><h3>${esc(a.title)}</h3><div class="by">${esc(a.by)}</div><p>${esc(a.text)}</p></div></div>`).join("");
+      <div class="award-text"><h3>${esc(a.title)}</h3><div class="by">${esc(a.by)}</div><p>${esc(a.text)}</p></div></div>`).join("");
+  document.querySelectorAll("#award-list .award").forEach((el, i) =>
+    addThumbs(el.querySelector(".award-text"), SITE.awards[i].slug, SITE.awards[i].title));
 
   // Skills
   $("skill-list").innerHTML = Object.entries(SITE.skills).map(([group, list]) =>
