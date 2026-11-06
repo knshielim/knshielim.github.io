@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keisha Nalani Shielim · Software Engineer Portfolio</title>
+<meta name="description" content="Keisha Nalani Shielim, Software Engineering student at Xiamen University Malaysia. Mobile, full-stack, AI, IoT and game projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --surface: #ffffff; --text: #1c1917; --muted: #57534e;
+    --border: #e7e5e4; --accent: #4f46e5; --accent-soft: #eef2ff; --accent-2: #0891b2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c0a09; --surface: #1c1917; --text: #f5f5f4; --muted: #a8a29e;
+      --border: #292524; --accent: #818cf8; --accent-soft: #1e1b4b; --accent-2: #22d3ee;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+  section { padding: 64px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.6rem; margin-bottom: 20px; }
+  h2 + .lead { margin-top: -12px; }
+  .lead { color: var(--muted); margin-bottom: 28px; }
+  h3 { font-size: 1.15rem; line-height: 1.35; }
+  ul { padding-left: 18px; }
+  li { margin: 4px 0; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  nav .brand { font-weight: 700; color: var(--text); white-space: nowrap; }
+  nav .menu { display: flex; gap: 20px; font-size: .92rem; overflow-x: auto; }
+  nav .menu a { color: var(--muted); white-space: nowrap; }
+  nav .menu a:hover { color: var(--text); text-decoration: none; }
+
+  /* Header */
+  header.wrap { padding-top: 64px; padding-bottom: 56px; }
+  .hero { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+  .avatar { width: 150px; height: 150px; border-radius: 50%; flex-shrink: 0; position: relative;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center;
+            color: #fff; font-size: 2.6rem; font-weight: 700; overflow: hidden; }
+  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-text { flex: 1; min-width: 260px; }
+  .hero h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.15; }
+  .role { font-size: 1.1rem; color: var(--accent); font-weight: 600; margin: 8px 0 12px; }
+  .summary { color: var(--muted); max-width: 620px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { font-size: .82rem; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+         background: var(--surface); color: var(--text); font-weight: 500; font-size: .92rem; }
+  .btn:hover { border-color: var(--accent); text-decoration: none; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0c0a09; } }
+
+  /* Featured */
+  .featured { display: grid; gap: 28px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+          display: grid; grid-template-columns: 1fr 1.15fr; }
+  .shots { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; background: var(--border); min-height: 240px; }
+  .shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shots.empty { display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+                 color: #fff; padding: 24px; text-align: center; }
+  .shots.empty span { font-size: 1.8rem; font-weight: 700; letter-spacing: -.01em; }
+  .shots.empty small { display: block; font-size: .85rem; opacity: .85; font-weight: 500; margin-top: 4px; }
+  .card .body { padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+  .meta { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  .card p, .card li { color: var(--muted); }
+  .card ul { font-size: .93rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: .78rem; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+  .roleline { font-size: .92rem; }
+
+  /* Other projects */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
+  .mini { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px;
+          display: flex; flex-direction: column; gap: 10px; }
+  .mini p { color: var(--muted); font-size: .93rem; }
+  .mini .actions { font-size: .92rem; gap: 16px; }
+
+  /* Design */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .gallery figure { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .gallery figcaption { padding: 10px 14px; font-size: .88rem; color: var(--muted); }
+
+  /* Experience */
+  .timeline { display: grid; gap: 14px; }
+  .exp { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px;
+         display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; }
+  .exp .org { color: var(--accent); font-weight: 500; font-size: .93rem; }
+  .exp .when { color: var(--muted); font-size: .85rem; white-space: nowrap; grid-column: 2; grid-row: 1; }
+  .exp p { grid-column: 1 / -1; color: var(--muted); font-size: .93rem; margin-top: 6px; }
+  .also { color: var(--muted); font-size: .93rem; margin-top: 18px; }
+
+  /* Awards */
+  .awards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+  .award { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; }
+  .award h3 { font-size: 1rem; }
+  .award p { color: var(--muted); font-size: .92rem; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 24px; }
+  .skills h3 { font-size: .95rem; margin-bottom: 10px; }
+
+  footer.wrap { padding-top: 64px; padding-bottom: 80px; border-top: 1px solid var(--border); text-align: center; }
+  footer p { color: var(--muted); margin: 8px 0 20px; }
+  footer .links { justify-content: center; }
+
+  @media (max-width: 760px) {
+    .card { grid-template-columns: 1fr; }
+    .shots { min-height: 180px; }
+    header.wrap { padding-top: 40px; padding-bottom: 40px; }
+    .hero { gap: 22px; }
+    .avatar { width: 112px; height: 112px; font-size: 2rem; }
+    nav .brand { display: none; }
+    nav .menu { gap: 14px; font-size: .86rem; }
+    .exp { grid-template-columns: 1fr; }
+    .exp .when { grid-column: 1; grid-row: auto; }
+    section { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+
+<script>
+/* =====================================================================
+   EDIT YOUR CONTENT HERE.
+   Images: put files in the images/ folder with the names used below.
+   Until an image exists, projects show a coloured title card and the
+   Design section stays hidden, so the site never shows broken images.
+   ===================================================================== */
+const SITE = {
+  name: "Keisha Nalani Shielim",
+  role: "Software Engineering Student · Xiamen University Malaysia",
+  summary: "Final-year software engineering student who builds across the stack: Flutter and IoT, ASP.NET Core and React, LLM agents, and Unity games. I also lead student teams, from sponsorship deals to 150-person industry events.",
+  chips: ["B.Eng (Hons) Software Engineering, 2023 – 2027", "Dean's List × 3", "100% tuition merit scholarship", "Based in Sepang, Selangor"],
+  photo: "images/profile.jpg",
+  initials: "KS",
+  links: {
+    resume: "resume.pdf",
+    github: "https://github.com/knshielim",
+    linkedin: "https://www.linkedin.com/in/keisha-nalani-shielim-3726132a2",
+    email: "keishanalanishielim@gmail.com",
+  },
+
+  featured: [
+    {
+      title: "HavaPaw",
+      subtitle: "IoT Smart Dog Collar & Health Monitoring App",
+      meta: "IoT + Mobile · Final Year Project · Jun 2026 – present",
+      description: "An ESP32 collar and Flutter app that track a dog's location and health, and tell the owner in plain language when readings drift from that dog's own normal.",
+      bullets: [
+        "ESP32 collar with GPS, heart rate, SpO₂, temperature and motion sensors. Pairs over Bluetooth and uploads over Wi-Fi to a secured cloud endpoint with per-device tokens.",
+        "Flutter app on Firebase with live tracking, safe-zone geofencing, health trends and push alerts. Cloud Functions compare each reading with the dog's own three-day baseline.",
+        "Random Forest classifier distilled to TensorFlow Lite to run on the phone, with 97.8% accuracy on held-out simulated pets, plus a GPT-4o “Virtual Vet” that explains alerts.",
+      ],
+      tech: ["Flutter", "Dart", "Firebase", "ESP32", "Arduino C++", "Python", "scikit-learn", "TensorFlow Lite", "OpenAI API"],
+      role: "",
+      images: ["images/havapaw-1.png", "images/havapaw-2.png"],
+      github: "https://github.com/knshielim/SWE2309441_FlutterApp", demo: "",
+    },
+    {
+      title: "Nomly",
+      subtitle: "AI-Powered Meal Planning & Pantry Management",
+      meta: "Full-stack web app · 6-person team · Jun – Jul 2026",
+      description: "Weekly meal planning with grocery lists, pantry tracking by receipt and photo scanning, and an AI assistant that suggests meals from your saved recipes and pantry.",
+      bullets: [
+        "Integrated Semantic Kernel with an LLM and wrote a custom plugin that reads each user's recipes and meal plans, so the assistant can suggest meals, summarise recipes and generate weekly plans from their own data.",
+        "Built pantry scanning: users add items by scanning a grocery receipt or photographing the food.",
+        "Restricted AI features to authenticated users, within the app's JWT and role-based access.",
+      ],
+      tech: ["ASP.NET Core", "C#", "EF Core", "React", "Semantic Kernel", "LLM", "JWT"],
+      role: "AI Assistant & pantry scanning developer",
+      images: ["images/nomly-1.png", "images/nomly-2.png"],
+      github: "https://github.com/knshielim/Nomly_PE", demo: "",
+    },
+    {
+      title: "TaskTracker",
+      subtitle: "Full-Stack Project & Task Management",
+      meta: "Full-stack web app · Individual · Apr – May 2026",
+      description: "Helps teams manage projects, assign tasks and track progress in one place, instead of scattered updates across email and chat.",
+      bullets: [
+        "Designed a normalised SQL database of five entities with cascade and set-null delete rules to keep data consistent.",
+        "Built a RESTful ASP.NET Core Web API with full CRUD, DTOs, input validation and consistent HTTP error responses.",
+        "React dashboard with statistics and charts, searchable and filterable task tables, colour-coded status and priority, overdue highlighting, and in-context comments.",
+      ],
+      tech: ["ASP.NET Core", "C#", "React", "SQL", "REST API"],
+      role: "",
+      images: ["images/tasktracker-1.png", "images/tasktracker-2.png"],
+      github: "https://github.com/knshielim/SWE2309441_SWE310_Assignment1", demo: "",
+    },
+    {
+      title: "Halabo Indonesia Tour",
+      subtitle: "Travel Booking Website",
+      meta: "Web app · 3-person team · Jun – Jul 2025",
+      description: "Browse Indonesian destinations and tour packages, register, book with payment and get a confirmation. Admins manage everything from a dashboard.",
+      bullets: [
+        "Designed the site structure: page hierarchy, navigation flow, and the shared JSP header and footer used on every page.",
+        "Built the destinations grid and detail pages, loaded from MySQL and linked to each destination's tour packages.",
+        "Wrote and curated content for 10+ destinations, including Borobudur, Bali, Raja Ampat and Komodo Island.",
+      ],
+      tech: ["Java", "JSP", "Servlets", "MySQL", "Tomcat"],
+      role: "Website structure & destination content",
+      images: ["images/halabo-1.png", "images/halabo-2.png"],
+      github: "https://github.com/knshielim/FinalProject_ProgrammingElective", demo: "",
+    },
+  ],
+
+  other: [
+    {
+      title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
+      description: "AI early-warning system for Indonesian peatland fires. I built the decision agent that turns risk predictions into bilingual emergency alerts, with dispatch rules, incident clustering, cooldowns, and Gemini rephrasing behind guardrails. Written in standard-library Python to run on IBM LinuxONE.",
+      tech: ["Python", "Gemini", "IBM LinuxONE"], github: "https://github.com/ProProcer/peatland-alert-system", demo: "",
+    },
+    {
+      title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
+      description: "Google Cardboard castle exploration controlled only by gaze. A reusable gaze-interaction system, teleport pads, and 12+ interactions including a working drawbridge, scored archery and a day/night clock.",
+      tech: ["Unity (URP)", "C#", "Google Cardboard"], github: "", demo: "https://drive.google.com/file/d/1O4Op5XPI2YuJ65S1-U3lFRodsUnCF1vd/view?usp=sharing",
+    },
+    {
+      title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
+      description: "Pixel-art tower defense with gacha summoning and unit merging. I built merging and Mythic combinations, the level manager, the boss trigger and the story dialogue system, and designed the UI sprites and screens.",
+      tech: ["Unity", "C#"], github: "https://github.com/knshielim/GAMEDEV", demo: "",
+    },
+    {
+      title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
+      description: "Chat-based AI assistant for GrabFood merchants. I built the mock merchant data, daily report metrics, stock projections, low-stock alerts and the inventory update feature.",
+      tech: ["Python", "Flask", "Gemini"], github: "https://github.com/ProProcer/mex-assistant-hackathon2", demo: "",
+    },
+    {
+      title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
+      description: "Recognises Southeast Asian banknotes from a photo. I designed and trained a multi-output network that predicts country, denomination and year range from one image.",
+      tech: ["Python", "TensorFlow", "Keras"], github: "https://github.com/knshielim/CurrencyDetector", demo: "",
+    },
+    {
+      title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
+      description: "Pac-Man in Godot. I programmed all four ghosts with distinct strategies (A* pursuit, predictive targeting, combined targeting, proximity switching) plus scatter, chase and frightened modes.",
+      tech: ["Godot", "GDScript", "A* search"], github: "https://github.com/GlazeProgramming/Pac-Man-AI-Search", demo: "",
+    },
+    {
+      title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
+      description: "First-person obstacle course with Rigidbody physics, running, jumping and pushable objects across three sections.",
+      tech: ["Unity", "C#"], github: "https://github.com/knshielim/Obstacles_Unity", demo: "",
+    },
+  ],
+
+  // Shown only once at least one of these image files exists.
+  design: [
+    { image: "images/design-sprites.png", caption: "UI sprites for Monster Merger TD" },
+    { image: "images/design-figma.png",   caption: "Figma mockups" },
+    { image: "images/design-poster-1.png", caption: "Event poster, XMUM AI Club" },
+    { image: "images/design-poster-2.png", caption: "Event poster, International Student Ambassador" },
+  ],
+
+  experience: [
+    { title: "Head of Sponsorship", org: "XMUM Artificial Intelligence Club (MINDS)", when: "Oct 2024 – Oct 2025",
+      text: "Led sponsor outreach and negotiations, and brought industry partners such as Huawei on campus for talks and company visits." },
+    { title: "Person-in-Charge & Emcee, Huawei Day: Intelligent World 2030", org: "XMUM AI Club", when: "Feb – Apr 2025",
+      text: "Main contact with Huawei's manager. Directed five committee divisions from planning to execution, for an event with 150+ attendees." },
+    { title: "Vice Organizing Chairperson, International Student Briefing", org: "XMUM International Student Ambassador (ISA)", when: "May – Oct 2026",
+      text: "Planned the schedule, catering, registration and crowd-control positions, reviewed the presentation slides, and coordinated helpers on the day." },
+    { title: "Treasurer", org: "XMUM International Student Ambassador (ISA)", when: "Jun 2024 – Nov 2026",
+      text: "Tracked the organisation's funds, prepared event financial reports, and planned budgets with event leads." },
+    { title: "Vice Organizing Chairperson, dPickleball", org: "XMUM AI Club", when: "Apr 2025 – present",
+      text: "Connected the design, outreach and sponsorship teams, managed the secretaries, and reviewed every poster and post before publishing." },
+    { title: "Secretary, Global Carnival 2026", org: "XMUM International Student Ambassador (ISA)", when: "Dec 2025 – May 2026",
+      text: "Ran documentation, registration records, forms and announcements across committees for one of XMUM's largest multicultural events." },
+    { title: "Project Leader, CS Go Community Service", org: "Xiamen University Malaysia", when: "Apr – Jul 2024",
+      text: "Led six committees to design and install campus signage and navigation maps, after getting approval from the maintenance department." },
+    { title: "Student Helper (part-time)", org: "Xiamen University Malaysia", when: "Dec 2024 – Oct 2026",
+      text: "Briefing-session helper across six intakes (VOC and crowd control in 2026/09), arrival helper for new international students, registration-day check-in, and convocation usher." },
+  ],
+  alsoExperience: "Also: Treasurer for the Explore Malaysia: Malacca trip (44 participants), Global Carnival sponsorship team, and Game Master for Crescendo Orientation and PPI MAKRAB.",
+
+  awards: [
+    { title: "Dean's List, three semesters", by: "Xiamen University Malaysia", text: "GPA 3.94 (2025/04), 3.88 (2025/09), 3.93 (2026/04)." },
+    { title: "Merit Scholarship & Student Grant", by: "Xiamen University Malaysia", text: "100% tuition coverage for all four years, kept by staying in the top 35% of the intake." },
+    { title: "IBM Z Datathon 2026", by: "Team project", text: "Agent Engineer for the Peatland Alert System." },
+    { title: "UMHackathon 2025", by: "Universiti Malaya", text: "Participant, built Grabot with a 5-person team." },
+    { title: "Huawei Talent Online certificates", by: "Huawei", text: "AI Basics (2025), 5G Basics (2024), Computer Networks (2024)." },
+  ],
+
+  skills: {
+    "Languages": ["Java", "C#", "Python", "Dart", "JavaScript", "C++", "GDScript", "SQL", "HTML", "CSS"],
+    "Web & Mobile": ["ASP.NET Core", "EF Core", "React", "Node.js", "Flutter", "Firebase", "JSP & Servlets", "Flask", "REST APIs", "JWT & RBAC"],
+    "AI & Data": ["TensorFlow", "TensorFlow Lite", "scikit-learn", "Semantic Kernel", "LLM integration", "Weka"],
+    "Games, XR & IoT": ["Unity", "Godot", "VR", "ESP32", "Arduino"],
+    "Tools & Testing": ["Git & GitHub", "Postman", "Selenium", "JMeter", "Wireshark", "Android Studio", "VS Code"],
+    "Design & Media": ["Figma", "Photoshop", "Illustrator", "InDesign", "Canva", "Aseprite", "Premiere Pro", "After Effects"],
+    "Spoken languages": ["English (native)", "Indonesian (native)", "Malay (limited working)", "Mandarin (elementary)"],
+  },
+};
+</script>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Keisha Nalani Shielim</a>
+    <div class="menu">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Leadership</a>
+      <a href="#awards">Awards</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap" id="top">
+  <div class="hero">
+    <div class="avatar" id="avatar"></div>
+    <div class="hero-text">
+      <h1 id="name"></h1>
+      <div class="role" id="role"></div>
+      <p class="summary" id="summary"></p>
+      <div class="chips" id="chips"></div>
+      <div class="links" id="links"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="projects"><div class="wrap">
+    <h2>Featured projects</h2>
+    <p class="lead">Mobile, IoT, full-stack and web: four projects that show the range.</p>
+    <div class="featured" id="featured"></div>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>More projects</h2>
+    <p class="lead">AI agents, machine learning, VR and games.</p>
+    <div class="grid" id="other"></div>
+  </div></section>
+
+  <section id="design-section" hidden><div class="wrap">
+    <h2>Design work</h2>
+    <p class="lead">UI sprites, mockups and event posters.</p>
+    <div class="gallery" id="design"></div>
+  </div></section>
+
+  <section id="experience"><div class="wrap">
+    <h2>Leadership & experience</h2>
+    <p class="lead">Student organisations and part-time work at Xiamen University Malaysia.</p>
+    <div class="timeline" id="timeline"></div>
+    <p class="also" id="also"></p>
+  </div></section>
+
+  <section id="awards"><div class="wrap">
+    <h2>Awards & certificates</h2>
+    <div class="awards" id="award-list"></div>
+  </div></section>
+
+  <section id="skills"><div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills" id="skill-list"></div>
+  </div></section>
+</main>
+
+<footer class="wrap" id="contact">
+  <h2>Let's talk</h2>
+  <p>Open to internships and graduate software engineering roles. Email is the fastest way to reach me.</p>
+  <div class="links" id="footer-links"></div>
+</footer>
+
+<script>
+(function () {
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = id => document.getElementById(id);
+  const ext = (url, label, cls) => url ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener">${label}</a>` : "";
+  const tags = list => `<div class="tags">${list.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+
+  // Header
+  $("name").textContent = SITE.name;
+  $("role").textContent = SITE.role;
+  $("summary").textContent = SITE.summary;
+  $("chips").innerHTML = SITE.chips.map(c => `<span class="chip">${esc(c)}</span>`).join("");
+  $("avatar").textContent = SITE.initials;
+  const photo = new Image();
+  photo.alt = "Photo of " + SITE.name;
+  photo.onload = () => $("avatar").appendChild(photo);
+  photo.src = SITE.photo;
+
+  const L = SITE.links;
+  const contactLinks = [
+    ext(L.resume, "Resume (PDF)", "btn primary"),
+    ext(L.github, "GitHub", "btn"),
+    ext(L.linkedin, "LinkedIn", "btn"),
+    `<a class="btn" href="mailto:${esc(L.email)}">Email</a>`,
+  ].join("");
+  $("links").innerHTML = contactLinks;
+  $("footer-links").innerHTML = `<a class="btn primary" href="mailto:${esc(L.email)}">${esc(L.email)}</a>` +
+    ext(L.linkedin, "LinkedIn", "btn") + ext(L.github, "GitHub", "btn");
+
+  // Featured projects
+  $("featured").innerHTML = SITE.featured.map((p, i) => `
+    <article class="card">
+      <div class="shots" data-i="${i}"></div>
+      <div class="body">
+        <span class="meta">${esc(p.meta)}</span>
+        <h3>${esc(p.title)}: ${esc(p.subtitle)}</h3>
+        <p>${esc(p.description)}</p>
+        ${p.role ? `<div class="roleline"><strong>My role:</strong> ${esc(p.role)}</div>` : ""}
+        <ul>${p.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+        ${tags(p.tech)}
+        <div class="actions">${ext(p.github, "View on GitHub", "btn")}${ext(p.demo, "Watch demo", "btn primary")}</div>
+      </div>
+    </article>`).join("");
+
+  // Load screenshots; fall back to a title card if none exist.
+  document.querySelectorAll(".shots").forEach(box => {
+    const p = SITE.featured[box.dataset.i];
+    let pending = p.images.length, loaded = 0;
+    const done = () => {
+      if (--pending === 0 && loaded === 0) {
+        box.classList.add("empty");
+        box.innerHTML = `<div><span>${esc(p.title)}</span><small>${esc(p.subtitle)}</small></div>`;
+      }
+    };
+    if (!pending) { pending = 1; done(); return; }
+    p.images.forEach(src => {
+      const img = new Image();
+      img.alt = p.title + " screenshot";
+      img.onload = () => { loaded++; box.appendChild(img); done(); };
+      img.onerror = done;
+      img.src = src;
+    });
+  });
+
+  // Other projects
+  $("other").innerHTML = SITE.other.map(p => `
+    <article class="mini">
+      <span class="meta">${esc(p.meta)}</span>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.description)}</p>
+      ${tags(p.tech)}
+      <div class="actions">${ext(p.github, "GitHub →", "")}${ext(p.demo, "Watch demo →", "")}</div>
+    </article>`).join("");
+
+  // Design gallery: only show items whose image exists.
+  SITE.design.forEach(d => {
+    const img = new Image();
+    img.alt = d.caption;
+    img.onload = () => {
+      const fig = document.createElement("figure");
+      fig.appendChild(img);
+      const cap = document.createElement("figcaption");
+      cap.textContent = d.caption;
+      fig.appendChild(cap);
+      $("design").appendChild(fig);
+      $("design-section").hidden = false;
+    };
+    img.src = d.image;
+  });
+
+  // Experience
+  $("timeline").innerHTML = SITE.experience.map(e => `
+    <article class="exp">
+      <h3>${esc(e.title)}</h3>
+      <span class="when">${esc(e.when)}</span>
+      <span class="org">${esc(e.org)}</span>
+      <p>${esc(e.text)}</p>
+    </article>`).join("");
+  $("also").textContent = SITE.alsoExperience || "";
+
+  // Awards
+  $("award-list").innerHTML = SITE.awards.map(a => `
+    <div class="award"><h3>${esc(a.title)}</h3><p><strong>${esc(a.by)}</strong> · ${esc(a.text)}</p></div>`).join("");
+
+  // Skills
+  $("skill-list").innerHTML = Object.entries(SITE.skills).map(([group, list]) =>
+    `<div><h3>${esc(group)}</h3>${tags(list)}</div>`).join("");
+})();
+</script>
+</body>
+</html>
