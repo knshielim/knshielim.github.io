@@ -606,31 +606,126 @@ const SITE = {
       slug: "stonehold", categories: ["Games & VR"], title: "Stonehold VR", meta: "Virtual Reality · Individual · Oct 2026",
       description: "Google Cardboard castle exploration controlled only by gaze. A reusable gaze-interaction system, teleport pads, and 12+ interactions including a working drawbridge, scored archery and a day/night clock.",
       tech: ["Unity (URP)", "C#", "Google Cardboard"], github: "", demo: "https://drive.google.com/file/d/1O4Op5XPI2YuJ65S1-U3lFRodsUnCF1vd/view?usp=sharing",
+      caseStudy: {
+        context: "SWE405 Virtual Reality · Individual assignment · Oct 2026",
+        problem: "Build a mobile VR experience for Google Cardboard, where the player has no controllers and can only look around. Every interaction has to work through gaze alone.",
+        built: [
+          "Built the whole castle in Unity (URP) from primitive shapes: hexagonal walls and towers, a Great Hall with a bell tower, a training yard, a blacksmith's forge, market stalls, a well, a moat and a waterfall.",
+          "Added atmosphere with a day/night cycle, scene fog and ambient 3D audio.",
+          "Wrote a reusable gaze interaction system in C#: a camera raycast and a filling reticle trigger any interactable object after a short dwell time.",
+          "Added gaze-based teleportation with colour-coded pads for moving around the castle and up onto the walls and towers.",
+          "Implemented 12+ interactions with sound effects, including a drawbridge and steel gate with moving chains and levers, scored archery (0–10 points by distance from the bullseye), sword training dummies, flickering torches, a clock that switches between day and night, and binoculars with a zoomed scope view.",
+        ],
+        results: [
+          { value: "12+", label: "gaze-driven interactions" },
+          { value: "0", label: "controllers needed" },
+        ],
+      },
     },
     {
       slug: "monster-merger", categories: ["Games & VR"], title: "Monster Merger TD", meta: "2D game · 4-person team · Gameplay Programmer & UI Designer",
       description: "Pixel-art tower defense with gacha summoning and unit merging. I built merging and Mythic combinations, the level manager, the boss trigger and the story dialogue system, and designed the UI sprites and screens.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/GAMEDEV", demo: "",
+      caseStudy: {
+        context: "Game Design and Development · 4-person team · Dec 2025 – Jan 2026",
+        problem: "Make a tower defense game with a twist: instead of just placing towers, players summon units gacha-style, merge them up through rarity tiers, and combine them into Mythic units using recipes.",
+        built: [
+          "A 2D pixel-art tower defense game in Unity (C#).",
+          "Gacha-style summoning, unit merging across rarity tiers, and recipe-based Mythic units.",
+          "An adaptive balancing system for summon rates, and enemy AI that scales with the level.",
+          "A tutorial and a JSON save/load system.",
+        ],
+        myPart: [
+          "Built core gameplay systems: tower upgrades, merging logic and Mythic tower combinations.",
+          "Built the AI's merging and Mythic deployment.",
+          "Built the level manager, Level 4 wave management and the Level 5 boss trigger.",
+          "Created the story dialogue system and wrote the game's initial backstory.",
+          "Designed the UI sprites and implemented the game's UI, from the level select scene to the Next Level, Game Over and Settings screens.",
+          "Handled game balancing, playtesting and bug fixing across both project phases.",
+        ],
+      },
     },
     {
       slug: "grabot", categories: ["AI"], title: "Grabot", meta: "UMHackathon 2025 · Data Report Specialist",
       description: "Chat-based AI assistant for GrabFood merchants. I built the mock merchant data, daily report metrics, stock projections, low-stock alerts and the inventory update feature.",
       tech: ["Python", "Flask", "Gemini"], github: "https://github.com/ProProcer/mex-assistant-hackathon2", demo: "",
+      caseStudy: {
+        context: "UMHackathon 2025 · Data Report Specialist · 5-person team · Apr 2025",
+        problem: "GrabFood merchants have plenty of business data, but no easy way to turn it into real-time insights or early warnings.",
+        built: [
+          "A chat-based assistant that combines Google Gemini with backend tools in a Flask app, so merchants can ask questions in plain language and get daily reports.",
+          "Reports cover sales, orders, sales and stock trends, stock forecasts, low-stock alerts and a top-products Pareto analysis.",
+          "Detects problems such as day-over-day sales drops, low order acceptance rates and critically low stock, and alerts merchants so they can act early.",
+        ],
+        myPart: [
+          "Generated and managed the mock merchant data behind Grabot.",
+          "Implemented the calculations for the daily report metrics.",
+          "Wrote the logic for stock projections and low-stock alerts.",
+          "Built the inventory update feature end to end: a form-style page where merchants enter new stock levels for each item, which then writes the changes back to the inventory data.",
+        ],
+      },
     },
     {
       slug: "currency-detector", categories: ["AI"], title: "Currency Detector", meta: "AI app · 5-person team · Model Design & Training",
       description: "Recognises Southeast Asian banknotes from a photo. I designed and trained a multi-output network that predicts country, denomination and year range from one image.",
       tech: ["Python", "TensorFlow", "Keras"], github: "https://github.com/knshielim/CurrencyDetector", demo: "",
+      caseStudy: {
+        context: "Python and TensorFlow Programming · 5-person team · Jun – Jul 2025",
+        problem: "Recognise Southeast Asian banknotes from a photo, and tell the user which country each note is from, its denomination and its year range.",
+        built: [
+          "An app where users upload a photo of a banknote.",
+          "It classifies Southeast Asian currency notes and shows the country, denomination and year range.",
+        ],
+        myPart: [
+          "Designed and trained the image classification model behind the app, using TensorFlow and Keras.",
+          "Built it as a multi-output network, with separate output layers that identify a banknote's country, denomination and year from a single image.",
+          "Tuned the hyperparameters to improve accuracy.",
+          "Saved and exported the trained model for the app to use.",
+        ],
+        results: [
+          { value: "3", label: "predictions from one photo" },
+        ],
+      },
     },
     {
       slug: "pacman", categories: ["Games & VR", "AI"], title: "Pac-Man AI", meta: "Game AI · 6-person team · Ghost AI developer",
       description: "Pac-Man in Godot. I programmed all four ghosts with distinct strategies (A* pursuit, predictive targeting, combined targeting, proximity switching) plus scatter, chase and frightened modes.",
       tech: ["Godot", "GDScript", "A* search"], github: "https://github.com/GlazeProgramming/Pac-Man-AI-Search", demo: "",
+      caseStudy: {
+        context: "Principles of Artificial Intelligence · 6-person team · Nov – Dec 2024",
+        problem: "Build Pac-Man in Godot with ghosts that feel smart, each chasing the player in its own way, using the AI search techniques from the course.",
+        built: [
+          "A Pac-Man game in Godot.",
+          "Verified through simulation, inspection and walkthrough testing.",
+        ],
+        myPart: [
+          "Programmed the AI and movement for all four ghosts, each with its own strategy: A* pathfinding for direct pursuit, predicting Pac-Man's position four tiles ahead, combined targeting using another ghost's position, and proximity-based switching between chasing and random movement.",
+          "Implemented the Scatter, Chase and Frightened behaviour modes, ghost animations and state transitions.",
+          "Tuned ghost speed and timing for each level.",
+          "Designed the Game Over menu.",
+        ],
+        results: [
+          { value: "4", label: "ghosts, each with its own strategy" },
+          { value: "3", label: "behaviour modes" },
+        ],
+      },
     },
     {
       slug: "obstacles", categories: ["Games & VR"], title: "Obstacles Unity", meta: "3D game · Individual · Nov – Dec 2025",
       description: "First-person obstacle course with Rigidbody physics, running, jumping and pushable objects across three sections.",
       tech: ["Unity", "C#"], github: "https://github.com/knshielim/Obstacles_Unity", demo: "",
+      caseStudy: {
+        context: "Digital Media Technology · Individual · Nov – Dec 2025",
+        problem: "Build a first-person 3D game where the player runs and jumps through obstacle sections to reach the finish.",
+        built: [
+          "Used Rigidbody physics, gravity and collision detection so that the player and obstacles react realistically, including objects that can be pushed.",
+          "Implemented first-person movement with running and jumping.",
+          "Designed three obstacle sections for the player to get through.",
+        ],
+        results: [
+          { value: "3", label: "obstacle sections" },
+        ],
+      },
     },
   ],
 
