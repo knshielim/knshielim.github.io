@@ -310,6 +310,43 @@
                  padding: 3px 9px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); }
   .lang .badge.soft { background: var(--accent-soft); color: var(--accent-strong); }
 
+  /* ---------------- Polish ---------------- */
+  /* Film-grain texture over the whole page */
+  body::before { content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; opacity: .035; mix-blend-mode: overlay;
+                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  /* Reading progress bar */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 40; transform-origin: 0 50%; transform: scaleX(0);
+              background: linear-gradient(90deg, var(--accent), var(--gold)); }
+  /* Rotating gradient ring around the photo */
+  .avatar-ring { position: relative; background: none; }
+  .avatar-ring::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
+                         background: conic-gradient(from 0deg, var(--accent), var(--gold), var(--accent-strong), var(--accent)); animation: spin 10s linear infinite; }
+  .avatar { z-index: 1; }
+  /* Typewriter line */
+  .typer { font-family: "Plus Jakarta Sans", sans-serif; font-size: clamp(1.15rem, 2.6vw, 1.45rem); font-weight: 700; margin: 2px 0 14px; min-height: 1.5em; }
+  .typer .word { background: linear-gradient(110deg, var(--accent-strong), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .typer .caret { display: inline-block; width: 3px; height: 1.05em; margin-left: 3px; vertical-align: -.15em; background: var(--gold); border-radius: 2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  /* Spotlight that follows the mouse on cards */
+  @media (hover: hover) {
+    .spot { position: relative; }
+    .spot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+                   background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 13%, transparent), transparent 60%); }
+    .spot:hover::after { opacity: 1; }
+  }
+  /* Big project number on featured cards */
+  .card .body { position: relative; }
+  .card .idx { position: absolute; top: 18px; right: 26px; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 3.6rem; line-height: 1;
+               color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 35%, transparent); pointer-events: none; user-select: none; }
+  .card .meta { padding-right: 70px; }
+  /* Back to top */
+  .to-top { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: 46px; height: 46px; border-radius: 14px; cursor: pointer;
+            border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; box-shadow: var(--shadow-hover);
+            opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .25s, transform .25s, border-color .2s; }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { border-color: var(--gold); color: var(--gold); }
+  .to-top svg { width: 20px; height: 20px; }
+
   /* ---------------- Contact ---------------- */
   .cta { position: relative; overflow: hidden; border-radius: 28px; padding: 64px 32px; text-align: center; border: 1px solid var(--border);
          background: radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 55%),
@@ -320,8 +357,16 @@
   .cta h2 { font-size: clamp(1.9rem, 5vw, 2.6rem); }
   .cta p { color: var(--muted); margin: 12px auto 28px; max-width: 520px; }
   .cta .links { justify-content: center; margin-top: 0; }
-  footer.copyright { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); font-size: .82rem; padding: 32px 0 40px; }
-  footer.copyright .flower { width: 14px; height: 14px; }
+  .site-footer { border-top: 1px solid var(--border); padding: 40px 0 36px; }
+  .site-footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .site-footer .f-brand { display: flex; align-items: center; gap: 10px; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 1.05rem; }
+  .site-footer .f-brand .flower { width: 26px; height: 26px; }
+  .site-footer .f-note { color: var(--muted); font-size: .84rem; margin-top: 4px; }
+  .site-footer .f-links { display: flex; gap: 8px; }
+  .site-footer .f-links a, .site-footer .f-links button { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface);
+            display: grid; place-items: center; color: var(--text); cursor: pointer; transition: border-color .2s, color .2s, transform .2s; }
+  .site-footer .f-links a:hover, .site-footer .f-links button:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .site-footer .f-links svg { width: 17px; height: 17px; }
 
   /* ---------------- Toast ---------------- */
   .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 200; opacity: 0; pointer-events: none;
@@ -415,6 +460,7 @@
 </style>
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <script>
 /* =====================================================================
@@ -433,7 +479,9 @@ const SITE = {
   summary: "Final-year software engineering student who builds across the stack: Flutter and IoT, ASP.NET Core and React, LLM agents, and Unity games. I also lead student teams, from sponsorship deals to 150-person industry events.",
   chips: ["B.Eng (Hons) Software Engineering, 2023 – 2027", "Dean's List × 3", "100% tuition merit scholarship", "Based in Sepang, Selangor"],
   photo: "images/profile",
-  status: "Open to internships & graduate roles",   // badge above your name; set to "" to hide
+  status: "Open to internships & graduate roles",
+  // Words that type out after "I build" in the header
+  building: ["mobile apps", "full-stack web apps", "AI agents", "IoT devices", "games & VR worlds"],   // badge above your name; set to "" to hide
   // Numbers shown under your intro. decimals = how many decimal places to show.
   stats: [
     { value: 3.85, decimals: 2, label: "CGPA" },
@@ -809,7 +857,7 @@ const SITE = {
     <div class="nav-right">
       <div class="menu" id="menu">
         <a href="#projects">Projects</a>
-        <a href="#experience">Leadership</a>
+        <a href="#experience">Experience</a>
         <a href="#awards">Awards</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
@@ -835,6 +883,7 @@ const SITE = {
         <div id="status"></div>
         <p class="hello">Hi, I'm</p>
         <h1 id="name"></h1>
+        <p class="typer" id="typer" aria-live="off"></p>
         <div class="role" id="role"></div>
         <p class="summary" id="summary"></p>
         <div class="chips" id="chips"></div>
@@ -907,7 +956,19 @@ const SITE = {
   </div></section>
 </main>
 
-<footer class="copyright" id="copyright"></footer>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="f-brand" id="f-brand"></div>
+      <div class="f-note" id="copyright"></div>
+    </div>
+    <div class="f-links" id="f-links"></div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -991,7 +1052,37 @@ const SITE = {
   $("footer-links").innerHTML = `<a class="btn primary" href="mailto:${esc(L.email)}">${I.mail}${esc(L.email)}</a>` +
     copyBtn("btn", true) + link(L.linkedin, "LinkedIn", "btn", "linkedin") + link(L.github, "GitHub", "btn", "github");
   document.querySelectorAll("[data-copy-email]").forEach(b => b.onclick = copyEmail);
-  $("copyright").innerHTML = FLOWER + `© ${new Date().getFullYear()} ${esc(SITE.name)}`;
+  $("f-brand").innerHTML = FLOWER + esc(SITE.name);
+  $("copyright").textContent = `© ${new Date().getFullYear()} · Designed & built by ${SITE.name.split(" ")[0]}`;
+  $("f-links").innerHTML = [
+    L.github ? `<a href="${esc(L.github)}" target="_blank" rel="noopener" aria-label="GitHub">${I.github}</a>` : "",
+    L.linkedin ? `<a href="${esc(L.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${I.linkedin}</a>` : "",
+    `<a href="mailto:${esc(L.email)}" aria-label="Email">${I.mail}</a>`,
+    `<button data-copy-email aria-label="Copy email address">${I.copy}</button>`,
+  ].join("");
+  document.querySelectorAll("#f-links [data-copy-email]").forEach(b => b.onclick = copyEmail);
+
+  // Typewriter: "I build <word>"
+  (function typer() {
+    const words = SITE.building || [];
+    const el = $("typer");
+    if (!words.length) { el.remove(); return; }
+    el.setAttribute("aria-label", "I build " + words.join(", "));
+    el.innerHTML = `<span aria-hidden="true">I build <span class="word"></span><span class="caret"></span></span>`;
+    const w = el.querySelector(".word");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { w.textContent = words[0]; return; }
+    let wi = 0, ci = 0, del = false;
+    const tick = () => {
+      const word = words[wi];
+      ci += del ? -1 : 1;
+      w.textContent = word.slice(0, ci);
+      let wait = del ? 40 : 80;
+      if (!del && ci === word.length) { del = true; wait = 1700; }
+      else if (del && ci === 0) { del = false; wi = (wi + 1) % words.length; wait = 350; }
+      setTimeout(tick, wait);
+    };
+    tick();
+  })();
 
   // ---------- Stats (count up when visible) ----------
   const stats = SITE.stats || [];
@@ -1135,6 +1226,7 @@ const SITE = {
     <article class="card reveal">
       <div class="shots" data-i="${i}"></div>
       <div class="body">
+        <span class="idx" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
         <span class="meta">${esc(p.meta)}</span>
         <h3>${esc(p.title)}<small>${esc(p.subtitle)}</small></h3>
         <p>${esc(p.description)}</p>
@@ -1343,7 +1435,24 @@ const SITE = {
   document.addEventListener("click", e => { if (nav.classList.contains("open") && !nav.contains(e.target)) closeMenu(); });
 
   // ---------- Nav border, section highlight, reveal ----------
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+  const progress = $("progress"), toTop = $("to-top");
+  toTop.onclick = () => window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  const onScroll = () => {
+    nav.classList.toggle("scrolled", window.scrollY > 8);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+    const footerTop = document.querySelector(".site-footer").getBoundingClientRect().top;
+    toTop.classList.toggle("show", scrollY > 900 && footerTop > innerHeight - 20);
+  };
+  // Spotlight glow that follows the mouse
+  document.querySelectorAll(".card, .mini, .award, .skill-group, .lang, .result").forEach(el => {
+    el.classList.add("spot");
+    el.addEventListener("pointermove", e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    });
+  });
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
   const menuLinks = [...document.querySelectorAll("nav .menu a")];
   if ("IntersectionObserver" in window) {
