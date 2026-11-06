@@ -213,23 +213,22 @@
   .g-icon svg { width: 18px; height: 18px; }
 
   /* Spoken languages */
-  .langs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
-  .lang { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-          padding: 24px; box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .langs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .lang { display: flex; align-items: center; gap: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+          padding: 22px; box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
   .lang:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--gold) 45%, var(--border)); }
-  .lang::after { content: attr(data-code); position: absolute; right: -6px; bottom: -22px; font-family: "Plus Jakarta Sans", sans-serif;
-                 font-size: 6rem; font-weight: 800; line-height: 1; color: var(--accent); opacity: .07; pointer-events: none; }
-  .lang .greet { font-family: "Plus Jakarta Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.2;
-                 background: linear-gradient(120deg, var(--accent-strong), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .lang .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
-  .lang h3 { font-size: 1.08rem; }
-  .lang .code { font-size: .72rem; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px;
-                background: var(--gold-soft); color: var(--gold); }
+  .ring { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring .track { stroke: var(--accent-soft); }
+  .ring .fill { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
+  .lang:not(.in) .ring .fill { stroke-dashoffset: var(--c) !important; }
+  .ring .code { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Plus Jakarta Sans", sans-serif;
+                font-weight: 800; font-size: 1.05rem; color: var(--accent-strong); letter-spacing: .02em; }
+  .lang h3 { font-size: 1.1rem; }
   .lang .label { color: var(--muted); font-size: .88rem; margin-top: 2px; }
-  .meter { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 16px; }
-  .meter span { height: 6px; border-radius: 3px; background: var(--accent-soft); }
-  .meter span.on { background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--gold))); }
-  .lang[data-level="5"] .meter span.on:last-child { background: var(--gold); }
+  .lang .badge { display: inline-block; margin-top: 8px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+                 padding: 3px 9px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); }
+  .lang .badge.soft { background: var(--accent-soft); color: var(--accent-strong); }
 
   /* Contact */
   .cta { position: relative; overflow: hidden; border-radius: 28px; padding: 64px 32px; text-align: center; border: 1px solid var(--border);
@@ -469,10 +468,10 @@ const SITE = {
 
   // Spoken languages. level: 1 = elementary … 5 = native (LinkedIn's scale)
   languages: [
-    { name: "English",    code: "EN", greeting: "Hello",  level: 5, label: "Native or bilingual" },
-    { name: "Indonesian", code: "ID", greeting: "Halo",   level: 5, label: "Native or bilingual" },
-    { name: "Malay",      code: "MS", greeting: "Apa khabar", level: 2, label: "Limited working" },
-    { name: "Mandarin",   code: "ZH", greeting: "你好",    level: 1, label: "Elementary" },
+    { name: "English",    code: "EN", level: 5, label: "Native or bilingual", short: "Native" },
+    { name: "Indonesian", code: "ID", level: 5, label: "Native or bilingual", short: "Native" },
+    { name: "Malay",      code: "MS", level: 2, label: "Limited working" },
+    { name: "Mandarin",   code: "ZH", level: 1, label: "Elementary" },
   ],
 
   skills: {
@@ -815,13 +814,24 @@ const SITE = {
   $("skill-list").innerHTML = Object.entries(SITE.skills).map(([group, list]) =>
     `<div class="skill-group reveal"><h3>${groupIcon(group)}${esc(group)}</h3>${tags(list)}</div>`).join("");
 
-  // Spoken languages
-  $("lang-list").innerHTML = (SITE.languages || []).map(l => `
-    <article class="lang reveal" data-code="${esc(l.code)}" data-level="${l.level}">
-      <div class="greet" lang="${esc(l.code.toLowerCase())}">${esc(l.greeting)}</div>
-      <div class="head"><h3>${esc(l.name)}</h3><span class="code">${esc(l.code)}</span></div>
-      <div class="label">${esc(l.label)}</div>
-      <div class="meter" role="img" aria-label="${esc(l.label)}, ${l.level} out of 5">${[1,2,3,4,5].map(n => `<span${n <= l.level ? ' class="on"' : ""}></span>`).join("")}</div>
+  // Spoken languages: a ring that fills to the level (out of 5), with the language code inside
+  const C = 2 * Math.PI * 30;
+  $("lang-list").innerHTML = (SITE.languages || []).map((l, i) => `
+    <article class="lang reveal">
+      <div class="ring" role="img" aria-label="${esc(l.name)}: ${esc(l.label)}, ${l.level} out of 5">
+        <svg viewBox="0 0 72 72" aria-hidden="true">
+          <defs><linearGradient id="lg${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--gold)"/></linearGradient></defs>
+          <circle class="track" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+          <circle class="fill" cx="36" cy="36" r="30" fill="none" stroke="url(#lg${i})" stroke-width="7" stroke-linecap="round"
+                  style="--c:${C}" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - l.level / 5)}"/>
+        </svg>
+        <span class="code">${esc(l.code)}</span>
+      </div>
+      <div>
+        <h3>${esc(l.name)}</h3>
+        <div class="label">${esc(l.short || l.label)}</div>
+        <span class="badge${l.level >= 5 ? "" : " soft"}">${l.level >= 5 ? "Fluent" : l.level >= 2 ? "Working" : "Basic"}</span>
+      </div>
     </article>`).join("");
 
   // ---------- Nav: border on scroll + highlight current section ----------
