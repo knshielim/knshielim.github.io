@@ -217,6 +217,25 @@
   .skill:hover svg { color: var(--gold); }
   .skill .dot { width: 7px; height: 7px; margin: 0 4px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); flex-shrink: 0; }
 
+  /* Spoken languages */
+  .langs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+  .lang { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+          padding: 24px; box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .lang:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--gold) 45%, var(--border)); }
+  .lang::after { content: attr(data-code); position: absolute; right: -6px; bottom: -22px; font-family: "Plus Jakarta Sans", sans-serif;
+                 font-size: 6rem; font-weight: 800; line-height: 1; color: var(--accent); opacity: .07; pointer-events: none; }
+  .lang .greet { font-family: "Plus Jakarta Sans", "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.2;
+                 background: linear-gradient(120deg, var(--accent-strong), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lang .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+  .lang h3 { font-size: 1.08rem; }
+  .lang .code { font-size: .72rem; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 999px;
+                background: var(--gold-soft); color: var(--gold); }
+  .lang .label { color: var(--muted); font-size: .88rem; margin-top: 2px; }
+  .meter { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 16px; }
+  .meter span { height: 6px; border-radius: 3px; background: var(--accent-soft); }
+  .meter span.on { background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--gold))); }
+  .lang[data-level="5"] .meter span.on:last-child { background: var(--gold); }
+
   /* Contact */
   .cta { position: relative; overflow: hidden; border-radius: 28px; padding: 64px 32px; text-align: center; border: 1px solid var(--border);
          background: radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 55%),
@@ -296,7 +315,7 @@ const SITE = {
     resume: "resume.pdf",
     github: "https://github.com/knshielim",
     linkedin: "https://www.linkedin.com/in/keisha-nalani-shielim-3726132a2",
-    email: "keishanalanishielim@gmail.com",
+    email: "keishanalani25@gmail.com",
   },
 
   featured: [
@@ -453,6 +472,14 @@ const SITE = {
     { slug: "huawei-certs", title: "Huawei Talent Online certificates", by: "Huawei", text: "AI Basics (2025), 5G Basics (2024), Computer Networks (2024)." },
   ],
 
+  // Spoken languages. level: 1 = elementary … 5 = native (LinkedIn's scale)
+  languages: [
+    { name: "English",    code: "EN", greeting: "Hello",  level: 5, label: "Native or bilingual" },
+    { name: "Indonesian", code: "ID", greeting: "Halo",   level: 5, label: "Native or bilingual" },
+    { name: "Malay",      code: "MS", greeting: "Apa khabar", level: 2, label: "Limited working" },
+    { name: "Mandarin",   code: "ZH", greeting: "你好",    level: 1, label: "Elementary" },
+  ],
+
   skills: {
     "Languages": ["Java", "C#", "Python", "Dart", "JavaScript", "C++", "GDScript", "SQL", "HTML", "CSS"],
     "Web & Mobile": ["ASP.NET Core", "EF Core", "React", "Node.js", "Flutter", "Firebase", "JSP & Servlets", "Flask", "REST APIs", "JWT & RBAC"],
@@ -460,7 +487,6 @@ const SITE = {
     "Games, XR & IoT": ["Unity", "Godot", "VR", "ESP32", "Arduino"],
     "Tools & Testing": ["Git & GitHub", "Postman", "Selenium", "JMeter", "Wireshark", "Android Studio", "VS Code"],
     "Design & Media": ["Figma", "Photoshop", "Illustrator", "InDesign", "Canva", "Aseprite", "Premiere Pro", "After Effects"],
-    "Spoken languages": ["English (native)", "Indonesian (native)", "Malay (limited working)", "Mandarin (elementary)"],
   },
 };
 </script>
@@ -533,11 +559,18 @@ const SITE = {
   <section id="skills" class="alt"><div class="wrap">
     <div class="eyebrow">Toolbox</div>
     <h2>Skills</h2>
-    <p class="lead">Languages, frameworks and tools I've used in real projects.</p>
+    <p class="lead">Programming languages, frameworks and tools I've used in real projects.</p>
     <div class="skills" id="skill-list"></div>
   </div></section>
 
-  <section id="contact"><div class="wrap">
+  <section id="languages"><div class="wrap">
+    <div class="eyebrow">Communication</div>
+    <h2>Languages</h2>
+    <p class="lead">I work comfortably across cultures, in English and Indonesian.</p>
+    <div class="langs" id="lang-list"></div>
+  </div></section>
+
+  <section id="contact" class="alt"><div class="wrap">
     <div class="cta reveal">
       <div class="eyebrow">Get in touch</div>
       <h2>Let's work together</h2>
@@ -829,7 +862,7 @@ const SITE = {
     globe: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
   };
   Object.assign(SKILL_ICONS, { "C#": "g:code", "SQL": "g:database", "REST APIs": "g:api", "Semantic Kernel": "g:sparkles", "Weka": "g:chart" });
-  const GROUP_ICON = { "Spoken languages": "g:globe" };
+  const GROUP_ICON = {};
   const iconFor = (name, group) => {
     const key = SKILL_ICONS[name] || GROUP_ICON[group];
     if (!key) return '<span class="dot"></span>';
@@ -839,6 +872,15 @@ const SITE = {
   $("skill-list").innerHTML = Object.entries(SITE.skills).map(([group, list]) =>
     `<div class="skill-group reveal"><h3>${esc(group)}</h3><div class="skill-list">${list.map(n =>
       `<span class="skill">${iconFor(n, group)}${esc(n)}</span>`).join("")}</div></div>`).join("");
+
+  // Spoken languages
+  $("lang-list").innerHTML = (SITE.languages || []).map(l => `
+    <article class="lang reveal" data-code="${esc(l.code)}" data-level="${l.level}">
+      <div class="greet" lang="${esc(l.code.toLowerCase())}">${esc(l.greeting)}</div>
+      <div class="head"><h3>${esc(l.name)}</h3><span class="code">${esc(l.code)}</span></div>
+      <div class="label">${esc(l.label)}</div>
+      <div class="meter" role="img" aria-label="${esc(l.label)}, ${l.level} out of 5">${[1,2,3,4,5].map(n => `<span${n <= l.level ? ' class="on"' : ""}></span>`).join("")}</div>
+    </article>`).join("");
 
   // ---------- Nav: border on scroll + highlight current section ----------
   const nav = $("nav");
