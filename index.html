@@ -160,6 +160,22 @@
           -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
   .arch .initials { font-family: "Instrument Serif", serif; font-style: italic; font-size: 8rem; color: rgba(255,255,255,.9); margin-bottom: 60px; }
   .arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+  /* Cutout mode (transparent PNG): the arch becomes a backdrop and the photo stands in front, head rising above it */
+  .hero-photo.cutout { height: auto; max-height: none; width: 126%; justify-self: center; align-self: end; aspect-ratio: .8; }
+  .hero-photo.cutout .arch { position: absolute; left: 8%; right: 8%; bottom: 0; width: auto; height: 72%; min-height: 0; }
+  .hero-photo.cutout .arch::before { content: ""; position: absolute; inset: 14px 14px 0; border-radius: 999px 999px 0 0;
+                                     border: 1px solid rgba(255,255,255,.28); border-bottom: 0; }
+  .hero-photo.cutout .arch .initials { display: none; }
+  .hero-photo .halo { display: none; }
+  .hero-photo.cutout .halo { display: block; position: absolute; left: 50%; bottom: 30%; width: 80%; aspect-ratio: 1; transform: translateX(-50%);
+                             border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--gold) 35%, transparent), transparent 65%); filter: blur(10px); }
+  .cutout-img { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 100%; width: auto; max-width: 118%; z-index: 1;
+                object-fit: contain; object-position: bottom; pointer-events: none; user-select: none;
+                -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%); mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+                animation: rise-in 1s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes rise-in { from { opacity: 0; transform: translate(-50%, 24px); } }
+  .hero-photo.cutout > .flower { top: 22%; right: 1%; width: 78px; height: 78px; z-index: 0; }
   .hero-photo > .flower { position: absolute; width: 96px; height: 96px; top: 2%; right: -10px; z-index: 2; animation: spin 18s linear infinite;
                           filter: drop-shadow(0 8px 18px rgba(0,0,0,.25)); }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -467,6 +483,8 @@
     .hero-grid { grid-template-columns: 1fr 1fr; min-height: 0; max-height: none; gap: 32px; padding-top: 32px; }
     .hero-left { grid-column: 1 / -1; padding-bottom: 0; }
     .hero-photo { height: 460px; }
+    .hero-photo.cutout { width: 100%; }
+    .hero-photo.cutout > .flower { right: -2%; top: 18%; width: 64px; height: 64px; }
     .arch { height: 100%; min-height: 0; }
     .hero-right { padding-bottom: 32px; }
     .intro-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -507,7 +525,8 @@
     section { padding: 76px 0; }
     .sec-head { margin-bottom: 34px; gap: 4px 14px; }
     .hero-grid { grid-template-columns: 1fr; }
-    .hero-photo { height: 380px; width: 82%; justify-self: center; }
+    .hero-photo { height: 400px; width: 86%; justify-self: center; }
+    .hero-photo.cutout { width: 92%; }
     .hero-photo > .flower { width: 70px; height: 70px; }
     .hero-right { gap: 24px; }
     .intro { padding-top: 64px; }
@@ -1183,11 +1202,27 @@ const SITE = {
     tick();
   })();
 
-  // Portrait
+  // Portrait: a transparent cutout (PNG/WEBP) stands in front of the arch; a normal photo fills the arch
   $("arch").innerHTML = `<span class="initials">${esc(SITE.initials)}</span>`;
   findFile(SITE.photo).then(url => {
     if (!url) return;
-    const img = new Image(); img.alt = "Photo of " + SITE.name; img.src = url; $("arch").appendChild(img);
+    const img = new Image(); img.alt = "Photo of " + SITE.name; img.src = url;
+    img.onload = () => {
+      let transparent = /\.(png|webp)$/i.test(url);
+      try {   // check a corner pixel for real transparency (not possible when opened as a local file)
+        const c = document.createElement("canvas"); c.width = c.height = 4;
+        const x = c.getContext("2d"); x.drawImage(img, 0, 0, 4, 4);
+        transparent = x.getImageData(0, 0, 1, 1).data[3] < 250;
+      } catch (e) {}
+      const box = document.querySelector(".hero-photo");
+      if (transparent) {
+        box.classList.add("cutout");
+        box.insertAdjacentHTML("afterbegin", '<span class="halo" aria-hidden="true"></span>');
+        img.className = "cutout-img";
+        box.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+        box.appendChild(img);
+      } else $("arch").appendChild(img);
+    };
   });
 
   // Intro strip + stats (count up when visible)
