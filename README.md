@@ -2,31 +2,29 @@
 
 🔗 **[knshielim.github.io](https://knshielim.github.io)**
 
-This is my personal portfolio website. It brings together my software projects, leadership experience, awards and skills from my studies in Software Engineering at Xiamen University Malaysia.
+This is my personal portfolio website. It brings together my software projects, experience, awards and skills from my studies in Software Engineering at Xiamen University Malaysia.
 
 ## What's inside
 
-- **About me:** a short introduction, my degree, an "open to internships & graduate roles" status, and links to my resume, GitHub, LinkedIn and email.
-- **Highlights:** key numbers at a glance: my CGPA, projects built and leadership roles.
-- **Featured projects:** four in-depth project showcases:
+- **Intro:** who I am and what I build, my "open to internships & graduate roles" status, key numbers (CGPA, projects and leadership roles), and links to my resume, GitHub, LinkedIn and email.
+- **01 · Selected work:** four featured projects shown as large image tiles:
   - **HavaPaw**: an IoT smart dog collar and Flutter app for health and location monitoring (Final Year Project)
   - **Nomly**: an AI-powered meal-planning and pantry management web app
   - **TaskTracker**: a full-stack project and task management web app
   - **Halabo Indonesia Tour**: a travel booking website
 
-  Each one shows what the project does, my role, what I built, the tech stack, screenshots, and a link to the code, plus a full **case study**: the problem, what was built, my part, and the results.
-- **More projects:** my other work, filterable by AI and Games & VR: Peatland Alert System (IBM Z Datathon), Stonehold VR, Monster Merger TD, Grabot (UMHackathon), Currency Detector, Pac-Man AI and Obstacles Unity.
-- **Leadership & experience:** my roles in student organisations, events and volunteering (XMUM AI Club, International Student Ambassador programme and more), plus part-time work at the university, with photos and certificates.
-- **Awards & certificates:** Dean's List awards, scholarship, hackathons and certifications.
-- **Skills:** programming languages, web and mobile frameworks, AI tools, game engines, testing tools and design software.
-- **Languages:** the languages I speak and my level in each.
-- **Contact:** how to reach me for internships and graduate roles.
+  **More projects:** an archive of my other work, filterable by AI and Games & VR: Peatland Alert System (IBM Z Datathon), Stonehold VR, Monster Merger TD, Grabot (UMHackathon), Currency Detector, Pac-Man AI and Obstacles Unity.
+
+  Every project opens a **case study**: the problem, what was built, my part, the results, the tech stack, screenshots, and links to the code or demo.
+- **02 · About:** a short story about me, a "Currently" panel (what I'm building, studying and open to), the languages I speak, and my toolbox of languages, frameworks and tools.
+- **03 · Experience:** highlighted leadership roles, plus an expandable list of all my roles in student organisations, events, volunteering and part-time work, with photos.
+- **04 · Awards & certificates:** Dean's List, scholarship, hackathons and certifications.
+- **05 · Contact:** how to reach me for internships and graduate roles.
 
 ## What it does
 
-- Shows each project's screenshots in a **slideshow**. Click any image to see it full screen.
-- Opens **case studies** in a panel without leaving the page.
-- Lets visitors **filter projects** by category.
+- Opens **case studies** in a panel without leaving the page, with a full-screen image viewer.
+- Lets visitors **filter projects** by category and **expand roles** for details and photos.
 - Switches between **light and dark mode**, in an ash purple and champagne gold theme with a flower motif.
 - **Copies my email** in one click.
 - Adapts to **phones, tablets and desktops**, with a compact menu on small screens.
