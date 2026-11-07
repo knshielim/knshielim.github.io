@@ -128,7 +128,7 @@
                   background: var(--accent); opacity: .18; filter: blur(90px); pointer-events: none; }
   .hero::after { content: ""; position: absolute; width: 520px; height: 520px; right: -180px; bottom: -120px; border-radius: 50%;
                  background: var(--gold); opacity: .12; filter: blur(90px); pointer-events: none; }
-  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr 1fr .78fr; gap: 40px; align-items: end;
+  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, .7fr); gap: 40px; align-items: end;
                min-height: calc(100vh - 68px); max-height: 860px; padding-top: 40px; }
   .hero-left { align-self: center; padding-bottom: 40px; }
   .dash { display: block; width: 56px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--gold)); margin-bottom: 26px; }
@@ -138,8 +138,8 @@
   .status .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
   .status .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green); animation: pulse 2s ease-out infinite; }
   @keyframes pulse { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3); opacity: 0; } }
-  .hero h1 { font-size: clamp(2.5rem, 4.6vw, 4.1rem); line-height: 1.04; font-weight: 800; letter-spacing: -.035em; }
-  .hero h1 .t2 { display: block; font-weight: 700; color: var(--muted); font-size: .82em; line-height: 1.08; margin-top: .08em; }
+  .hero h1 { font-size: clamp(2.5rem, 4.3vw, 4.8rem); line-height: 1.04; font-weight: 800; letter-spacing: -.035em; }
+  .hero h1 .t2 { display: block; font-weight: 700; color: var(--muted); font-size: .74em; line-height: 1.08; margin-top: .1em; }
   .hero h1 .t2 .serif { font-weight: 400; color: transparent; background: linear-gradient(110deg, var(--accent-strong), var(--gold));
                         -webkit-background-clip: text; background-clip: text; padding-right: .05em; }
   .typed { margin-top: 18px; font-size: 1.12rem; color: var(--muted); min-height: 1.6em; }
@@ -162,7 +162,10 @@
   .arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
   /* Cutout mode (transparent PNG): the arch becomes a backdrop and the photo stands in front, head rising above it */
-  .hero-photo.cutout { height: auto; max-height: none; width: 126%; justify-self: center; align-self: end; aspect-ratio: .8; }
+  /* Desktop: size the photo by the hero's height so it stays big on large screens; width follows the image's proportions */
+  .hero .wrap.hero-grid, nav .wrap { max-width: 1440px; }
+  /* Photo fills its column as fully as it can, capped by the screen height; it never pushes the other columns */
+  .hero-photo.cutout { width: 100%; height: auto; aspect-ratio: .8; max-height: clamp(440px, 82vh, 840px); justify-self: center; align-self: end; }
   .hero-photo.cutout .arch { position: absolute; left: 8%; right: 8%; bottom: 0; width: auto; height: 72%; min-height: 0; }
   .hero-photo.cutout .arch::before { content: ""; position: absolute; inset: 14px 14px 0; border-radius: 999px 999px 0 0;
                                      border: 1px solid rgba(255,255,255,.28); border-bottom: 0; }
@@ -483,7 +486,7 @@
     .hero-grid { grid-template-columns: 1fr 1fr; min-height: 0; max-height: none; gap: 32px; padding-top: 32px; }
     .hero-left { grid-column: 1 / -1; padding-bottom: 0; }
     .hero-photo { height: 460px; }
-    .hero-photo.cutout { width: 100%; }
+    .hero-photo.cutout { width: 100%; height: auto; max-width: none; }
     .hero-photo.cutout > .flower { right: -2%; top: 18%; width: 64px; height: 64px; }
     .arch { height: 100%; min-height: 0; }
     .hero-right { padding-bottom: 32px; }
@@ -526,7 +529,7 @@
     .sec-head { margin-bottom: 34px; gap: 4px 14px; }
     .hero-grid { grid-template-columns: 1fr; }
     .hero-photo { height: 400px; width: 86%; justify-self: center; }
-    .hero-photo.cutout { width: 92%; }
+    .hero-photo.cutout { width: 92%; height: auto; }
     .hero-photo > .flower { width: 70px; height: 70px; }
     .hero-right { gap: 24px; }
     .intro { padding-top: 64px; }
