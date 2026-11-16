@@ -295,6 +295,8 @@
   .row .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .row .t { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 1.12rem; }
   .row .d { color: var(--muted); font-size: .88rem; margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .row .feat { display: inline-block; vertical-align: 3px; margin-left: 8px; font-family: Inter, sans-serif; font-size: .68rem; font-weight: 700;
+               letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); }
   .row .k { font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
 
   /* ---------------- About ---------------- */
@@ -615,7 +617,7 @@ const SITE = {
       ],
       tech: ["Flutter", "Dart", "Firebase", "ESP32", "Arduino C++", "Python", "scikit-learn", "TensorFlow Lite", "OpenAI API"],
       role: "",
-      slug: "havapaw", kind: "IoT + Mobile", year: "2026",
+      slug: "havapaw", kind: "IoT + Mobile", year: "2026", categories: ["Mobile", "AI"],
       caseStudy: {
         context: "Final Year Project · Jun 2026 – present",
         problem: "Dogs can't tell us when they feel unwell, and one-size-fits-all health thresholds don't suit every dog. HavaPaw learns each dog's own normal and tells the owner, in plain language, when readings drift away from it.",
@@ -646,7 +648,7 @@ const SITE = {
       ],
       tech: ["ASP.NET Core", "C#", "EF Core", "React", "Semantic Kernel", "LLM", "JWT"],
       role: "AI Assistant & pantry scanning developer",
-      slug: "nomly", kind: "Full-stack · AI", year: "2026",
+      slug: "nomly", kind: "Full-stack · AI", year: "2026", categories: ["Web", "AI"],
       caseStudy: {
         context: "Programming Elective II (.NET) · 6-person team · Jun – Jul 2026",
         problem: "Meal planning, pantry tracking and grocery lists usually live in different places. Nomly brings them together, with an AI assistant that works from your own recipes and what's already in your pantry.",
@@ -677,7 +679,7 @@ const SITE = {
       ],
       tech: ["ASP.NET Core", "C#", "React", "SQL", "REST API"],
       role: "",
-      slug: "tasktracker", kind: "Full-stack", year: "2026",
+      slug: "tasktracker", kind: "Full-stack", year: "2026", categories: ["Web"],
       caseStudy: {
         context: "Individual assignment · SWE310 (.NET) · Apr – May 2026",
         problem: "When project updates are scattered across email and chat, teams lose track of who is doing what. TaskTracker keeps projects, task assignments, progress and discussion in one place.",
@@ -705,7 +707,7 @@ const SITE = {
       ],
       tech: ["Java", "JSP", "Servlets", "MySQL", "Tomcat"],
       role: "Website structure & destination content",
-      slug: "halabo", kind: "Web", year: "2025",
+      slug: "halabo", kind: "Web", year: "2025", categories: ["Web"],
       caseStudy: {
         context: "Programming Elective II (Java EE) · 3-person team · Jun – Jul 2025",
         problem: "Travellers need one place to discover Indonesian destinations, compare tour packages and book them, while the business needs to manage destinations, packages and bookings behind the scenes.",
@@ -1038,11 +1040,11 @@ const SITE = {
   <section id="work"><div class="wrap">
     <div class="sec-head"><span class="sec-num">01</span><span class="sec-label">Selected work</span>
       <h2>Things I've <span class="serif">built</span></h2>
-      <p class="sec-lead">Four featured builds, plus an archive of everything else. Open any project for the full case study.</p></div>
+      <p class="sec-lead">Four featured builds, then the full list of everything I've built. Open any project for the full case study.</p></div>
     <div class="bento" id="bento"></div>
 
     <div class="archive-head">
-      <h3>More <span class="serif">projects</span></h3>
+      <h3>All <span class="serif">projects</span></h3>
       <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
     </div>
     <div class="archive" id="archive"></div>
@@ -1379,32 +1381,34 @@ const SITE = {
     m.innerHTML = `<span class="tile-num">${String(+tile.dataset.i + 1).padStart(2, "0")}</span><div class="backdrop" style="background-image:url('${esc(imgs[0])}')"></div><img src="${esc(imgs[0])}" alt="${esc(p.title)} screenshot">`;
   });
 
-  // Archive list + filters
-  $("archive").innerHTML = SITE.other.map((p, i) => `
+  // All projects list (featured + the rest), newest first, with filters
+  const ALLP = [...SITE.featured.map(p => ({ ...p, featured: true })), ...SITE.other]
+    .map((p, k) => ({ p, k })).sort((a, b) => (+b.p.year || 0) - (+a.p.year || 0) || a.k - b.k).map(x => x.p);
+  $("archive").innerHTML = ALLP.map((p, i) => `
     <button class="row" data-i="${i}" aria-label="Open case study: ${esc(p.title)}">
       <span class="yr">${esc(p.year || "")}</span>
       <span class="thumb"></span>
-      <span><div class="t">${esc(p.title)}</div><div class="d">${esc(p.description)}</div></span>
+      <span><div class="t">${esc(p.title)}${p.featured ? ' <span class="feat">Featured</span>' : ""}</div><div class="d">${esc(p.description)}</div></span>
       <span class="k">${esc(p.kind || "")}</span>
       <span class="go"><span class="circle">${I.arrow}</span></span>
     </button>`).join("");
   document.querySelectorAll("#archive .row").forEach(async row => {
-    const p = SITE.other[row.dataset.i];
+    const p = ALLP[row.dataset.i];
     row.onclick = () => openCase(p);
     const imgs = await findSeries(p.slug);
     if (imgs.length) row.querySelector(".thumb").innerHTML = `<img src="${esc(imgs[0])}" alt="">`;
   });
   const cats = [];
-  SITE.other.forEach(p => (p.categories || []).forEach(c => { if (!cats.includes(c)) cats.push(c); }));
+  ALLP.forEach(p => (p.categories || []).forEach(c => { if (!cats.includes(c)) cats.push(c); }));
   if (cats.length > 1) {
-    const countOf = c => c === "All" ? SITE.other.length : SITE.other.filter(p => (p.categories || []).includes(c)).length;
+    const countOf = c => c === "All" ? ALLP.length : ALLP.filter(p => (p.categories || []).includes(c)).length;
     $("filters").innerHTML = ["All", ...cats].map((c, k) =>
       `<button data-cat="${esc(c)}" aria-pressed="${k === 0}"${k === 0 ? ' class="on"' : ""}>${esc(c)}<span class="n">${countOf(c)}</span></button>`).join("");
     $("filters").querySelectorAll("button").forEach(b => b.onclick = () => {
       const c = b.dataset.cat;
       $("filters").querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); });
       document.querySelectorAll("#archive .row").forEach(row => {
-        const p = SITE.other[row.dataset.i];
+        const p = ALLP[row.dataset.i];
         row.classList.toggle("hide", c !== "All" && !(p.categories || []).includes(c));
       });
     });
