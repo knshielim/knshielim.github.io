@@ -583,15 +583,15 @@ const SITE = {
   headline: "Software Engineering student",   // shown as: I'm Keisha, a <headline>
   heroBlurbs: {
     about: "Final-year student at Xiamen University Malaysia, building across mobile, full-stack, AI and IoT.",
-    work: "11 projects, from a smart dog collar to AI agents and VR, each with a full case study.",
+    work: "12 projects, from a smart dog collar to AI agents and VR, each with a full case study.",
   },
-  intro: "I've built 11 projects across mobile, web, AI and games since starting university in 2023, while leading student teams on the side.",
+  intro: "I've built 12 projects across mobile, web, AI and games since starting university in 2023, while leading student teams on the side.",
   // Words that type out after "I build" in the header
   building: ["mobile apps", "full-stack web apps", "AI agents", "IoT devices", "games & VR worlds"],   // badge above your name; set to "" to hide
   // Numbers shown under your intro. decimals = how many decimal places to show.
   stats: [
     { value: 3.85, decimals: 2, label: "CGPA" },
-    { value: 11, label: "Projects" },
+    { value: 12, label: "Projects" },
     { value: 14, label: "Leadership roles" },
   ],
   initials: "KS",
@@ -728,6 +728,28 @@ const SITE = {
   ],
 
   other: [
+    {
+      slug: "brainquest", kind: "Android app", year: "2026", categories: ["Mobile"], title: "BrainQuest", meta: "Android app · SWE401 Mobile Application Development · Nov 2026",
+      subtitle: "Game-Based IGCSE Learning App",
+      description: "An offline Android app that gives Cambridge IGCSE students in Year 9 to 11 lessons, timed past-paper quizzes and progress tracking for 12 subjects, with points, levels and badges to keep them practising.",
+      tech: ["Android", "Gamification", "SHA-256 hashing", "Offline-first"], github: "https://github.com/knshielim/BrainQuest", demo: "",
+      caseStudy: {
+        context: "Mobile Application Development (SWE401) · Nov 2026",
+        problem: "IGCSE students in Year 9 to 11 revise from scattered notes, past papers and trackers. BrainQuest puts lessons, timed past-paper quizzes and progress tracking for 12 subjects into one Android app that works fully offline.",
+        built: [
+          "Illustrated lessons for 12 IGCSE subjects, each with key points, a Quick Practice question and swipeable flashcards.",
+          "Timed 10-question quizzes adapted from Cambridge past papers, with feedback and an explanation for every answer.",
+          "Progress analysis: best scores per subject, quiz history, and a written summary of the student's strongest and weakest subjects.",
+          "Game mechanics to keep students practising: points, levels, stars, 12 badges and a completion certificate.",
+          "Local accounts with salted SHA-256 password hashing and separate progress for each student, so classmates can share one phone. All data stays on the device.",
+        ],
+        results: [
+          { value: "12", label: "IGCSE subjects covered" },
+          { value: "12", label: "badges to earn" },
+          { value: "100%", label: "offline: data never leaves the phone" },
+        ],
+      },
+    },
     {
       slug: "peatland", kind: "AI agent", year: "2026", categories: ["AI"], title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
       description: "AI early-warning system for Indonesian peatland fires. I built the decision agent that turns risk predictions into bilingual emergency alerts, with dispatch rules, incident clustering, cooldowns, and Gemini rephrasing behind guardrails. Written in standard-library Python to run on IBM LinuxONE.",
