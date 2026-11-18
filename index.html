@@ -369,11 +369,12 @@
   .thumbs .more { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(20,17,26,.66); color: #fff; font-weight: 700; }
 
   /* ---------------- Recognition ---------------- */
-  .awards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 26px; overflow: hidden;
+  .awards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 26px; overflow: hidden;
             background: var(--surface); box-shadow: var(--shadow); }
   .award { position: relative; padding: 28px 22px 24px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; text-align: left;
            background: transparent; border-top: 0; border-bottom: 0; border-left: 0; cursor: default; transition: background .25s; }
-  .award:last-child { border-right: 0; }
+  .award:nth-child(3n) { border-right: 0; }
+  .award:not(:nth-last-child(-n+3)) { border-bottom: 1px solid var(--border); }
   .award.has-photos { cursor: zoom-in; }
   .award:hover { background: var(--accent-soft); }
   .award .big { font-family: "Instrument Serif", serif; font-style: italic; font-size: clamp(2.6rem, 4.4vw, 3.6rem); line-height: .95;
@@ -501,9 +502,9 @@
     .highlights { grid-template-columns: 1fr; }
     .hl { min-height: 230px; }
     .awards { grid-template-columns: repeat(2, 1fr); }
-    .award { border-bottom: 1px solid var(--border); }
+    .award, .award:nth-child(3n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .award:nth-child(2n) { border-right: 0; }
-    .award:last-child { grid-column: span 2; border-bottom: 0; }
+    .award:nth-last-child(-n+2) { border-bottom: 0; }
   }
   @media (max-width: 860px) {
     #menu-toggle { display: grid; }
@@ -538,8 +539,8 @@
     .intro-stats { gap: 12px; }
     .tile-body { padding: 20px; }
     .awards { grid-template-columns: 1fr; }
-    .award, .award:nth-child(2n) { border-right: 0; }
-    .award:last-child { grid-column: auto; }
+    .award, .award:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--border); }
+    .award:last-child { border-bottom: 0; }
     .tool-row { grid-template-columns: 1fr; gap: 2px; }
     .modal { padding: 0; }
     .modal-panel { border-radius: 0; min-height: 100%; }
@@ -753,11 +754,11 @@ const SITE = {
       },
     },
     {
-      slug: "peatland", kind: "AI agent", year: "2026", categories: ["AI"], title: "Peatland Alert System", meta: "IBM Z Datathon · Agent Engineer · Oct 2026",
+      slug: "peatland", kind: "AI agent", year: "2026", categories: ["AI"], title: "Peatland Alert System", meta: "IBM Z Datathon (IBM Z & Shooting Stars Foundation) · Agent Engineer · Oct 2026",
       description: "AI early-warning system for Indonesian peatland fires. I built the decision agent that turns risk predictions into bilingual emergency alerts, with dispatch rules, incident clustering, cooldowns, and Gemini rephrasing behind guardrails. Written in standard-library Python to run on IBM LinuxONE.",
       tech: ["Python", "Gemini", "IBM LinuxONE"], github: "https://github.com/ProProcer/peatland-alert-system", demo: "",
       caseStudy: {
-        context: "IBM Z Datathon · Agent Engineer · 5-person team · Oct 2026",
+        context: "IBM Z Datathon by IBM Z & Shooting Stars Foundation · Agent Engineer · 5-person team · Oct 2026",
         problem: "Peatland fires in Indonesia spread quickly and are hard to contain. Our team built an early-warning system that predicts fire risk 24–72 hours ahead, so responders can act sooner.",
         built: [
           "Combined weather, peatland and satellite fire-hotspot data to assess fire risk.",
@@ -955,7 +956,8 @@ const SITE = {
   awards: [
     { slug: "deans-list", big: "3×", title: "Dean's List, three semesters", by: "Xiamen University Malaysia", text: "GPA 3.94 (2025/04), 3.88 (2025/09), 3.93 (2026/04)." },
     { slug: "scholarship", big: "100%", title: "Merit Scholarship & Student Grant", by: "Xiamen University Malaysia", text: "100% tuition coverage for all four years, kept by staying in the top 35% of the intake." },
-    { slug: "ibm-datathon", big: "", title: "IBM Z Datathon 2026", by: "Team project", text: "Agent Engineer for the Peatland Alert System." },
+    { slug: "wbt", big: "#49", title: "World Best Tester 2026", by: "Global software testing competition", text: "Ranked 49th out of 351 in Malaysia (top 14%), testing a surprise web app against the clock." },
+    { slug: "ibm-datathon", big: "", title: "IBM Z Datathon 2026", by: "IBM Z & Shooting Stars Foundation", text: "Agent Engineer for the Peatland Alert System." },
     { slug: "umhackathon", big: "", title: "UMHackathon 2025", by: "Universiti Malaya", text: "Participant, built Grabot with a 5-person team." },
     { slug: "huawei-certs", big: "3", title: "Huawei Talent Online certificates", by: "Huawei", text: "AI Basics (2025), 5G Basics (2024), Computer Networks (2024)." },
   ],
